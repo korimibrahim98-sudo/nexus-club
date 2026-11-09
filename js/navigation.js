@@ -1,3 +1,4 @@
+
 /* =========================================
    NEXUS UNIVERSITY CLUB
    Navigation Controller
@@ -7,50 +8,63 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const menuToggle = document.getElementById("menuToggle");
     const navMenu = document.getElementById("navMenu");
+
+    // Get all navigation links
     const navLinks = document.querySelectorAll(".nav-links a");
 
-    // Open and close mobile menu
+    // Mobile Menu
     if (menuToggle && navMenu) {
 
-        menuToggle.addEventListener("click", () => {
+        function openMenu() {
+            navMenu.classList.add("open");
+            menuToggle.classList.add("active");
+            menuToggle.setAttribute("aria-expanded", "true");
+        }
 
-            const isOpen = navMenu.classList.toggle("open");
+        function closeMenu() {
+            navMenu.classList.remove("open");
+            menuToggle.classList.remove("active");
+            menuToggle.setAttribute("aria-expanded", "false");
+        }
 
-            menuToggle.classList.toggle("active", isOpen);
+        function toggleMenu() {
+            const isOpen = navMenu.classList.contains("open");
 
-            menuToggle.setAttribute(
-                "aria-expanded",
-                isOpen ? "true" : "false"
-            );
-
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener("click", (event) => {
-
-            const clickedInsideMenu = navMenu.contains(event.target);
-            const clickedToggle = menuToggle.contains(event.target);
-
-            if (!clickedInsideMenu && !clickedToggle) {
-                navMenu.classList.remove("open");
-                menuToggle.classList.remove("active");
-                menuToggle.setAttribute("aria-expanded", "false");
+            if (isOpen) {
+                closeMenu();
+            } else {
+                openMenu();
             }
+        }
 
+        // Toggle button
+        menuToggle.addEventListener("click", (event) => {
+            event.stopPropagation();
+            toggleMenu();
         });
 
-        // Close menu after selecting a link
+        // Close after clicking a link
         navLinks.forEach(link => {
-
             link.addEventListener("click", () => {
-
-                navMenu.classList.remove("open");
-                menuToggle.classList.remove("active");
-
-                menuToggle.setAttribute("aria-expanded", "false");
-
+                closeMenu();
             });
+        });
 
+        // Close when clicking outside
+        document.addEventListener("click", (event) => {
+            if (
+                !navMenu.contains(event.target) &&
+                !menuToggle.contains(event.target)
+            ) {
+                closeMenu();
+            }
+        });
+
+        // Close with Escape key
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeMenu();
+            }
         });
 
     }
@@ -60,65 +74,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     navLinks.forEach(link => {
 
-        const linkPage = link.getAttribute("href").split("/").pop();
+        const href = link.getAttribute("href");
+
+        if (!href) return;
+
+        const linkPage = href.split("/").pop();
 
         if (linkPage === currentPage) {
-
             navLinks.forEach(item => {
                 item.classList.remove("active");
             });
 
             link.classList.add("active");
-
         }
 
-    });
-
-});
-document.addEventListener("DOMContentLoaded", () => {
-
-    const menuToggle = document.querySelector(".menu-toggle");
-
-    const navMenu =
-        document.querySelector("#navMenu") ||
-        document.querySelector(".nav-menu");
-
-    if (!menuToggle || !navMenu) return;
-
-    function closeMenu() {
-        navMenu.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-    }
-
-    function toggleMenu() {
-        const isOpen = navMenu.classList.toggle("open");
-
-        menuToggle.setAttribute(
-            "aria-expanded",
-            isOpen ? "true" : "false"
-        );
-    }
-
-    menuToggle.addEventListener("click", (event) => {
-        event.stopPropagation();
-        toggleMenu();
-    });
-
-    // Close menu after selecting any page
-    navMenu.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
-            closeMenu();
-        });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener("click", (event) => {
-        if (
-            !navMenu.contains(event.target) &&
-            !menuToggle.contains(event.target)
-        ) {
-            closeMenu();
-        }
     });
 
 });
