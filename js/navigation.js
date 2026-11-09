@@ -1,93 +1,54 @@
 
-/* =========================================
-   NEXUS UNIVERSITY CLUB
-   Navigation Controller
-========================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    const menuToggle = document.getElementById("menuToggle");
-    const navMenu = document.getElementById("navMenu");
+    const menuToggle = document.querySelector("#menuToggle, .menu-toggle");
+    const navMenu = document.querySelector("#navMenu, .nav-menu");
 
-    // Get all navigation links
-    const navLinks = document.querySelectorAll(".nav-links a");
+    if (!menuToggle || !navMenu) return;
 
-    // Mobile Menu
-    if (menuToggle && navMenu) {
-
-        function openMenu() {
-            navMenu.classList.add("open");
-            menuToggle.classList.add("active");
-            menuToggle.setAttribute("aria-expanded", "true");
-        }
-
-        function closeMenu() {
-            navMenu.classList.remove("open");
-            menuToggle.classList.remove("active");
-            menuToggle.setAttribute("aria-expanded", "false");
-        }
-
-        function toggleMenu() {
-            const isOpen = navMenu.classList.contains("open");
-
-            if (isOpen) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
-        }
-
-        // Toggle button
-        menuToggle.addEventListener("click", (event) => {
-            event.stopPropagation();
-            toggleMenu();
-        });
-
-        // Close after clicking a link
-        navLinks.forEach(link => {
-            link.addEventListener("click", () => {
-                closeMenu();
-            });
-        });
-
-        // Close when clicking outside
-        document.addEventListener("click", (event) => {
-            if (
-                !navMenu.contains(event.target) &&
-                !menuToggle.contains(event.target)
-            ) {
-                closeMenu();
-            }
-        });
-
-        // Close with Escape key
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "Escape") {
-                closeMenu();
-            }
-        });
-
+    function openMenu() {
+        navMenu.classList.add("open");
+        menuToggle.classList.add("active");
+        menuToggle.setAttribute("aria-expanded", "true");
     }
 
-    // Highlight current page
-    const currentPage = window.location.pathname.split("/").pop();
+    function closeMenu() {
+        navMenu.classList.remove("open");
+        menuToggle.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
+    }
 
-    navLinks.forEach(link => {
+    // Open and close using the three-lines button
+    menuToggle.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
 
-        const href = link.getAttribute("href");
-
-        if (!href) return;
-
-        const linkPage = href.split("/").pop();
-
-        if (linkPage === currentPage) {
-            navLinks.forEach(item => {
-                item.classList.remove("active");
-            });
-
-            link.classList.add("active");
+        if (navMenu.classList.contains("open")) {
+            closeMenu();
+        } else {
+            openMenu();
         }
+    });
 
+    // Keep clicks inside the menu from triggering outside-click
+    navMenu.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        if (event.target.closest("a")) {
+            closeMenu();
+        }
+    });
+
+    // Close when clicking anywhere outside
+    document.addEventListener("click", () => {
+        closeMenu();
+    });
+
+    // Close with Escape
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeMenu();
+        }
     });
 
 });
