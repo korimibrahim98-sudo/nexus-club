@@ -1,0 +1,731 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PR Department | NEXUS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/animations.css">
+
+    <style>
+        :root {
+            --pr: #38bdf8;
+            --pr-light: #67e8f9;
+            --pr-blue: #2563eb;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 85% 15%, rgba(56,189,248,.13), transparent 30%),
+                radial-gradient(circle at 10% 65%, rgba(37,99,235,.1), transparent 30%),
+                #08090e;
+        }
+
+        .pr-hero {
+            min-height: 83vh;
+            padding: 130px 8% 90px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(110deg, rgba(8,9,14,.97), rgba(8,9,14,.72));
+        }
+
+        .pr-hero::before {
+            content: "";
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            border: 1px solid rgba(56,189,248,.2);
+            border-radius: 50%;
+            right: -220px;
+            top: -100px;
+            box-shadow: 0 0 100px rgba(56,189,248,.1);
+        }
+
+        .pr-hero-content {
+            max-width: 750px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pr-label {
+            display: inline-block;
+            padding: 9px 18px;
+            border: 1px solid rgba(56,189,248,.4);
+            background: rgba(56,189,248,.08);
+            border-radius: 30px;
+            color: var(--pr);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .pr-hero h1 {
+            font-size: clamp(42px, 7vw, 82px);
+            line-height: 1.3;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .pr-hero h1 span {
+            display: block;
+            background: linear-gradient(90deg, #38bdf8, #67e8f9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .pr-hero p {
+            color: #b5b5c0;
+            font-size: 18px;
+            line-height: 2;
+            max-width: 650px;
+            margin-bottom: 35px;
+        }
+
+        .pr-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .pr-btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: .3s;
+        }
+
+        .pr-btn.primary {
+            background: linear-gradient(135deg, #0ea5e9, #2563eb);
+            color: white;
+            box-shadow: 0 8px 30px rgba(56,189,248,.2);
+        }
+
+        .pr-btn.secondary {
+            border: 1px solid #344b60;
+            color: white;
+        }
+
+        .pr-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(56,189,248,.25);
+        }
+
+        .pr-visual {
+            position: absolute;
+            left: 9%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px solid rgba(56,189,248,.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 110px;
+            box-shadow: 0 0 80px rgba(56,189,248,.12), inset 0 0 50px rgba(56,189,248,.08);
+            animation: prFloat 5s ease-in-out infinite;
+        }
+
+        .pr-visual::before,
+        .pr-visual::after {
+            content: "";
+            position: absolute;
+            inset: 20px;
+            border: 1px dashed rgba(103,232,249,.4);
+            border-radius: 50%;
+            animation: prRotate 20s linear infinite;
+        }
+
+        .pr-visual::after {
+            inset: -25px;
+            border-style: solid;
+            border-color: rgba(56,189,248,.2);
+            animation-direction: reverse;
+            animation-duration: 30s;
+        }
+
+        @keyframes prFloat {
+            0%, 100% { margin-top: 0; }
+            50% { margin-top: -15px; }
+        }
+
+        @keyframes prRotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .pr-section {
+            padding: 90px 8%;
+        }
+
+        .pr-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .pr-heading span {
+            color: var(--pr);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+        }
+
+        .pr-heading h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            margin: 12px 0;
+        }
+
+        .pr-heading p {
+            color: #9999a7;
+            line-height: 1.9;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .pr-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .pr-intro h2 {
+            font-size: 34px;
+            margin-bottom: 20px;
+        }
+
+        .pr-intro h2 span {
+            color: var(--pr);
+        }
+
+        .pr-intro p {
+            color: #aaaab5;
+            line-height: 2.1;
+            margin-bottom: 15px;
+        }
+
+        .pr-quote {
+            padding: 40px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(56,189,248,.14), rgba(37,99,235,.04));
+            border: 1px solid rgba(56,189,248,.25);
+        }
+
+        .pr-quote strong {
+            color: var(--pr-light);
+            display: block;
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .pr-quote p {
+            font-size: 19px;
+            color: #d0d0dc;
+            line-height: 2;
+        }
+
+        .pr-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .pr-card {
+            padding: 30px;
+            min-height: 245px;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #151a22, #10141b);
+            border: 1px solid #283744;
+            transition: .35s;
+        }
+
+        .pr-card:hover {
+            transform: translateY(-9px);
+            border-color: var(--pr);
+            box-shadow: 0 15px 35px rgba(56,189,248,.1);
+        }
+
+        .pr-icon {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .pr-card h3 {
+            color: white;
+            font-size: 21px;
+            margin-bottom: 13px;
+        }
+
+        .pr-card p {
+            color: #a4aeb8;
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+        .pr-process {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .pr-step {
+            text-align: center;
+            padding: 25px 15px;
+            background: #131922;
+            border: 1px solid #283744;
+            border-radius: 16px;
+            transition: .3s;
+        }
+
+        .pr-step:hover {
+            border-color: var(--pr);
+            transform: translateY(-5px);
+        }
+
+        .pr-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 18px;
+            background: rgba(56,189,248,.13);
+            border: 1px solid var(--pr);
+            color: var(--pr-light);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .pr-step h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .pr-step p {
+            color: #9999a7;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .pr-projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .pr-project {
+            padding: 30px;
+            background: linear-gradient(120deg, #151d27, #10141b);
+            border-right: 4px solid var(--pr);
+            border-radius: 12px;
+        }
+
+        .pr-project h3 {
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .pr-project p {
+            color: #aab2bd;
+            line-height: 1.9;
+        }
+
+        .pr-skills {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .pr-skill {
+            padding: 18px;
+            border: 1px solid #283744;
+            background: rgba(255,255,255,.035);
+            border-radius: 10px;
+            color: #d4dce5;
+        }
+
+        .pr-skill::before {
+            content: "✦";
+            color: var(--pr);
+            margin-left: 10px;
+        }
+
+        .pr-cta {
+            margin: 30px 8% 90px;
+            padding: 65px 30px;
+            text-align: center;
+            border-radius: 25px;
+            background: radial-gradient(circle at center, rgba(56,189,248,.18), transparent 65%), #111821;
+            border: 1px solid rgba(56,189,248,.3);
+        }
+
+        .pr-cta h2 {
+            font-size: clamp(27px, 4vw, 40px);
+            margin-bottom: 15px;
+        }
+
+        .pr-cta p {
+            color: #aab2bd;
+            margin-bottom: 28px;
+            line-height: 1.9;
+        }
+
+        /* NAVBAR FIX */
+        @media (min-width: 901px) {
+            .navbar {
+                display: grid !important;
+                grid-template-columns: minmax(130px, 1fr) auto minmax(130px, 1fr);
+                align-items: center;
+                width: 100%;
+                box-sizing: border-box;
+                direction: ltr;
+                padding-inline: 5%;
+                gap: 15px;
+            }
+
+            .navbar .logo {
+                justify-self: start;
+                white-space: nowrap;
+            }
+
+            .navbar .nav-links {
+                justify-self: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                direction: rtl;
+                gap: clamp(10px, 1.4vw, 22px);
+                white-space: nowrap;
+                margin: 0;
+            }
+
+            .navbar .nav-join {
+                justify-self: end;
+                white-space: nowrap;
+                margin: 0;
+                position: static;
+            }
+        }
+
+        @media (min-width: 901px) and (max-width: 1150px) {
+            .navbar .nav-links {
+                gap: 9px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .pr-visual {
+                opacity: .14;
+                left: -80px;
+            }
+
+            .pr-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pr-process {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .pr-hero {
+                min-height: 75vh;
+                padding: 110px 6% 70px;
+            }
+
+            .pr-visual {
+                display: none;
+            }
+
+            .pr-section {
+                padding: 65px 6%;
+            }
+
+            .pr-intro,
+            .pr-grid,
+            .pr-projects,
+            .pr-skills {
+                grid-template-columns: 1fr;
+            }
+
+            .pr-cta {
+                margin: 20px 5% 60px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .pr-process {
+                grid-template-columns: 1fr;
+            }
+
+            .pr-actions {
+                flex-direction: column;
+            }
+
+            .pr-btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">NEXUS<span>.</span></div>
+
+        <nav class="nav-links">
+            <a href="../index.html">الرئيسية</a>
+            <a href="about.html">عن النادي</a>
+            <a href="departments.html" class="active">الأقسام</a>
+            <a href="events.html">الفعاليات</a>
+            <a href="projects.html">المشاريع</a>
+            <a href="contact.html">تواصل معنا</a>
+        </nav>
+
+        <a href="join.html" class="nav-join">انضم إلينا</a>
+    </header>
+
+    <main>
+
+        <section class="pr-hero">
+            <div class="pr-hero-content reveal">
+                <span class="pr-label">NEXUS / PUBLIC RELATIONS</span>
+
+                <h1>
+                    العلاقات تصنع الفرص...
+                    <span>والتواصل يصنع التأثير.</span>
+                </h1>
+
+                <p>
+                    قسم العلاقات العامة هو حلقة الوصل بين NEXUS والعالم الخارجي.
+                    نبني العلاقات، نتواصل مع الشركاء، ونفتح أبوابًا جديدة
+                    للتعاون والفرص التي تساعد النادي على النمو.
+                </p>
+
+                <div class="pr-actions">
+                    <a href="join.html?department=PR" class="pr-btn primary">انضم لفريق PR</a>
+                    <a href="#specialties" class="pr-btn secondary">اكتشف القسم</a>
+                </div>
+            </div>
+
+            <div class="pr-visual" aria-hidden="true">🤝</div>
+        </section>
+
+        <section class="pr-section">
+            <div class="pr-intro">
+                <div class="reveal">
+                    <span class="pr-label">WHO WE ARE</span>
+
+                    <h2>نحن نبني الجسور بين NEXUS و<span>العالم.</span></h2>
+
+                    <p>
+                        قسم PR مسؤول عن بناء صورة إيجابية للنادي والتواصل
+                        مع الجهات والأشخاص خارج الفريق، وتمثيل NEXUS
+                        في الفعاليات والاجتماعات والمناسبات المختلفة.
+                    </p>
+
+                    <p>
+                        نعمل على اكتشاف فرص التعاون والرعاية والشراكات،
+                        وتطوير شبكة علاقات تساعد النادي وأعضاءه
+                        على الوصول إلى فرص وتجارب جديدة.
+                    </p>
+                </div>
+
+                <div class="pr-quote reveal">
+                    <strong>Our Philosophy</strong>
+                    <p>
+                        "Your network is not just who you know,
+                        it's how you build meaningful connections."
+                    </p>
+                    <p>
+                        نؤمن أن العلاقة الناجحة تبدأ بالثقة،
+                        وتستمر بالتواصل والاحترام المتبادل.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pr-section" id="specialties">
+            <div class="pr-heading reveal">
+                <span>OUR SPECIALTIES</span>
+                <h2>ماذا نفعل داخل PR؟</h2>
+                <p>مجالات مختلفة تساعد النادي على بناء علاقات قوية وفرص حقيقية.</p>
+            </div>
+
+            <div class="pr-grid">
+
+                <article class="pr-card reveal">
+                    <span class="pr-icon">🤝</span>
+                    <h3>Partnerships</h3>
+                    <p>البحث عن فرص التعاون وبناء علاقات مع المؤسسات والجهات المختلفة.</p>
+                </article>
+
+                <article class="pr-card reveal">
+                    <span class="pr-icon">💼</span>
+                    <h3>Sponsorships</h3>
+                    <p>التواصل مع الرعاة المحتملين وتجهيز عروض التعاون والرعاية.</p>
+                </article>
+
+                <article class="pr-card reveal">
+                    <span class="pr-icon">📞</span>
+                    <h3>External Communication</h3>
+                    <p>إدارة التواصل الرسمي مع الشركات والمتحدثين والضيوف.</p>
+                </article>
+
+                <article class="pr-card reveal">
+                    <span class="pr-icon">🎤</span>
+                    <h3>Representation</h3>
+                    <p>تمثيل النادي في الفعاليات والاجتماعات والأنشطة الخارجية.</p>
+                </article>
+
+                <article class="pr-card reveal">
+                    <span class="pr-icon">🌐</span>
+                    <h3>Networking</h3>
+                    <p>توسيع شبكة العلاقات والتعرف على أشخاص ومجتمعات جديدة.</p>
+                </article>
+
+                <article class="pr-card reveal">
+                    <span class="pr-icon">📢</span>
+                    <h3>Public Relations</h3>
+                    <p>الحفاظ على صورة إيجابية للنادي وتطوير علاقته بالمجتمع.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="pr-section">
+            <div class="pr-heading reveal">
+                <span>HOW WE WORK</span>
+                <h2>كيف نصنع علاقة ناجحة؟</h2>
+                <p>نعتمد على خطوات واضحة لبناء علاقات احترافية ومستدامة.</p>
+            </div>
+
+            <div class="pr-process">
+
+                <div class="pr-step reveal">
+                    <div class="pr-number">01</div>
+                    <h3>Research</h3>
+                    <p>تحديد الجهات المناسبة وفهم أهدافها واهتماماتها.</p>
+                </div>
+
+                <div class="pr-step reveal">
+                    <div class="pr-number">02</div>
+                    <h3>Connect</h3>
+                    <p>بدء التواصل وتقديم النادي وأفكاره بصورة احترافية.</p>
+                </div>
+
+                <div class="pr-step reveal">
+                    <div class="pr-number">03</div>
+                    <h3>Collaborate</h3>
+                    <p>مناقشة فرص التعاون والاتفاق على أهداف مشتركة.</p>
+                </div>
+
+                <div class="pr-step reveal">
+                    <div class="pr-number">04</div>
+                    <h3>Maintain</h3>
+                    <p>متابعة العلاقة والحفاظ على التواصل المستمر.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="pr-section">
+            <div class="pr-heading reveal">
+                <span>OUR PROJECTS</span>
+                <h2>تجارب ومشاريع يمكنك العمل عليها</h2>
+                <p>فرص عملية لتطبيق مهارات التواصل وبناء العلاقات.</p>
+            </div>
+
+            <div class="pr-projects">
+
+                <article class="pr-project reveal">
+                    <h3>🏢 Corporate Partnerships</h3>
+                    <p>إنشاء قاعدة بيانات للشركات والمؤسسات المناسبة والتواصل معها لبحث فرص التعاون.</p>
+                </article>
+
+                <article class="pr-project reveal">
+                    <h3>🎯 Sponsorship Campaign</h3>
+                    <p>إعداد ملف رعاية متكامل وتقديمه للجهات المحتملة لدعم فعاليات النادي.</p>
+                </article>
+
+                <article class="pr-project reveal">
+                    <h3>🎤 Guest Speakers</h3>
+                    <p>التواصل مع المتخصصين والخبراء لتنظيم جلسات وورش عمل مع أعضاء النادي.</p>
+                </article>
+
+                <article class="pr-project reveal">
+                    <h3>🌍 Networking Events</h3>
+                    <p>تنظيم فرص للتواصل بين أعضاء NEXUS والفرق والمجتمعات الأخرى.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="pr-section">
+            <div class="pr-heading reveal">
+                <span>YOUR SKILLS</span>
+                <h2>المهارات التي ستكتسبها</h2>
+                <p>ستتعلم كيف تتحدث بثقة وتبني علاقات وتتعامل باحترافية.</p>
+            </div>
+
+            <div class="pr-skills reveal">
+                <div class="pr-skill">Communication Skills</div>
+                <div class="pr-skill">Negotiation</div>
+                <div class="pr-skill">Presentation Skills</div>
+                <div class="pr-skill">Networking</div>
+                <div class="pr-skill">Professional Writing</div>
+                <div class="pr-skill">Relationship Building</div>
+                <div class="pr-skill">Persuasion</div>
+                <div class="pr-skill">Problem Solving</div>
+                <div class="pr-skill">Business Etiquette</div>
+            </div>
+        </section>
+
+        <section class="pr-cta reveal">
+            <h2>هل تحب التواصل وفتح أبواب جديدة؟</h2>
+            <p>
+                لو بتحب التعامل مع الناس، وعندك استعداد تتعلم التفاوض
+                وتمثيل فريقك وبناء علاقات قوية، مكانك ممكن يكون معانا.
+            </p>
+
+            <a href="join.html?department=PR" class="pr-btn primary">
+                ابدأ رحلتك مع PR
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h2>NEXUS<span>.</span></h2>
+                <p>Think Beyond. Build Together.</p>
+            </div>
+
+            <p>© 2026 NEXUS University Club. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/animations.js"></script>
+
+</body>
+</html>

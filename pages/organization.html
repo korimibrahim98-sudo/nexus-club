@@ -1,0 +1,730 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization Department | NEXUS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/animations.css">
+
+    <style>
+        :root {
+            --org: #fbbf24;
+            --org-light: #fde68a;
+            --org-orange: #f97316;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 85% 15%, rgba(251,191,36,.12), transparent 30%),
+                radial-gradient(circle at 10% 65%, rgba(249,115,22,.08), transparent 30%),
+                #08090e;
+        }
+
+        .org-hero {
+            min-height: 83vh;
+            padding: 130px 8% 90px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(110deg, rgba(8,9,14,.97), rgba(8,9,14,.72));
+        }
+
+        .org-hero::before {
+            content: "";
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            border: 1px solid rgba(251,191,36,.2);
+            border-radius: 50%;
+            right: -220px;
+            top: -100px;
+            box-shadow: 0 0 100px rgba(251,191,36,.1);
+        }
+
+        .org-hero-content {
+            max-width: 750px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .org-label {
+            display: inline-block;
+            padding: 9px 18px;
+            border: 1px solid rgba(251,191,36,.4);
+            background: rgba(251,191,36,.08);
+            border-radius: 30px;
+            color: var(--org);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .org-hero h1 {
+            font-size: clamp(42px, 7vw, 82px);
+            line-height: 1.3;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .org-hero h1 span {
+            display: block;
+            background: linear-gradient(90deg, #fbbf24, #f97316);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .org-hero p {
+            color: #b5b5c0;
+            font-size: 18px;
+            line-height: 2;
+            max-width: 650px;
+            margin-bottom: 35px;
+        }
+
+        .org-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .org-btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: .3s;
+        }
+
+        .org-btn.primary {
+            background: linear-gradient(135deg, #fbbf24, #ea580c);
+            color: #17120a;
+            box-shadow: 0 8px 30px rgba(251,191,36,.2);
+        }
+
+        .org-btn.secondary {
+            border: 1px solid #51412a;
+            color: white;
+        }
+
+        .org-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(251,191,36,.2);
+        }
+
+        .org-visual {
+            position: absolute;
+            left: 9%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px solid rgba(251,191,36,.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 110px;
+            box-shadow: 0 0 80px rgba(251,191,36,.12), inset 0 0 50px rgba(251,191,36,.08);
+            animation: orgFloat 5s ease-in-out infinite;
+        }
+
+        .org-visual::before,
+        .org-visual::after {
+            content: "";
+            position: absolute;
+            inset: 20px;
+            border: 1px dashed rgba(253,230,138,.4);
+            border-radius: 50%;
+            animation: orgRotate 20s linear infinite;
+        }
+
+        .org-visual::after {
+            inset: -25px;
+            border-style: solid;
+            border-color: rgba(249,115,22,.2);
+            animation-direction: reverse;
+            animation-duration: 30s;
+        }
+
+        @keyframes orgFloat {
+            0%, 100% { margin-top: 0; }
+            50% { margin-top: -15px; }
+        }
+
+        @keyframes orgRotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .org-section {
+            padding: 90px 8%;
+        }
+
+        .org-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .org-heading span {
+            color: var(--org);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+        }
+
+        .org-heading h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            margin: 12px 0;
+        }
+
+        .org-heading p {
+            color: #9999a7;
+            line-height: 1.9;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .org-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .org-intro h2 {
+            font-size: 34px;
+            margin-bottom: 20px;
+        }
+
+        .org-intro h2 span {
+            color: var(--org);
+        }
+
+        .org-intro p {
+            color: #aaaab5;
+            line-height: 2.1;
+            margin-bottom: 15px;
+        }
+
+        .org-quote {
+            padding: 40px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(251,191,36,.13), rgba(249,115,22,.04));
+            border: 1px solid rgba(251,191,36,.25);
+        }
+
+        .org-quote strong {
+            color: var(--org-light);
+            display: block;
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .org-quote p {
+            font-size: 19px;
+            color: #d0d0dc;
+            line-height: 2;
+        }
+
+        .org-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .org-card {
+            padding: 30px;
+            min-height: 245px;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #1b1914, #12110e);
+            border: 1px solid #393124;
+            transition: .35s;
+        }
+
+        .org-card:hover {
+            transform: translateY(-9px);
+            border-color: var(--org);
+            box-shadow: 0 15px 35px rgba(251,191,36,.1);
+        }
+
+        .org-icon {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .org-card h3 {
+            color: white;
+            font-size: 21px;
+            margin-bottom: 13px;
+        }
+
+        .org-card p {
+            color: #aaa69c;
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+        .org-process {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .org-step {
+            text-align: center;
+            padding: 25px 15px;
+            background: #18160f;
+            border: 1px solid #393124;
+            border-radius: 16px;
+            transition: .3s;
+        }
+
+        .org-step:hover {
+            border-color: var(--org);
+            transform: translateY(-5px);
+        }
+
+        .org-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 18px;
+            background: rgba(251,191,36,.13);
+            border: 1px solid var(--org);
+            color: var(--org-light);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .org-step h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .org-step p {
+            color: #aaa69c;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .org-projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .org-project {
+            padding: 30px;
+            background: linear-gradient(120deg, #1b1914, #12110e);
+            border-right: 4px solid var(--org);
+            border-radius: 12px;
+        }
+
+        .org-project h3 {
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .org-project p {
+            color: #aaa69c;
+            line-height: 1.9;
+        }
+
+        .org-skills {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .org-skill {
+            padding: 18px;
+            border: 1px solid #393124;
+            background: rgba(255,255,255,.035);
+            border-radius: 10px;
+            color: #e0ddd4;
+        }
+
+        .org-skill::before {
+            content: "✦";
+            color: var(--org);
+            margin-left: 10px;
+        }
+
+        .org-cta {
+            margin: 30px 8% 90px;
+            padding: 65px 30px;
+            text-align: center;
+            border-radius: 25px;
+            background: radial-gradient(circle at center, rgba(251,191,36,.18), transparent 65%), #18150f;
+            border: 1px solid rgba(251,191,36,.3);
+        }
+
+        .org-cta h2 {
+            font-size: clamp(27px, 4vw, 40px);
+            margin-bottom: 15px;
+        }
+
+        .org-cta p {
+            color: #aaa69c;
+            margin-bottom: 28px;
+            line-height: 1.9;
+        }
+
+        /* NAVBAR FIX */
+        @media (min-width: 901px) {
+            .navbar {
+                display: grid !important;
+                grid-template-columns: minmax(130px, 1fr) auto minmax(130px, 1fr);
+                align-items: center;
+                width: 100%;
+                box-sizing: border-box;
+                direction: ltr;
+                padding-inline: 5%;
+                gap: 15px;
+            }
+
+            .navbar .logo {
+                justify-self: start;
+                white-space: nowrap;
+            }
+
+            .navbar .nav-links {
+                justify-self: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                direction: rtl;
+                gap: clamp(10px, 1.4vw, 22px);
+                white-space: nowrap;
+                margin: 0;
+            }
+
+            .navbar .nav-join {
+                justify-self: end;
+                white-space: nowrap;
+                margin: 0;
+                position: static;
+            }
+        }
+
+        @media (min-width: 901px) and (max-width: 1150px) {
+            .navbar .nav-links {
+                gap: 9px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .org-visual {
+                opacity: .14;
+                left: -80px;
+            }
+
+            .org-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .org-process {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .org-hero {
+                min-height: 75vh;
+                padding: 110px 6% 70px;
+            }
+
+            .org-visual {
+                display: none;
+            }
+
+            .org-section {
+                padding: 65px 6%;
+            }
+
+            .org-intro,
+            .org-grid,
+            .org-projects,
+            .org-skills {
+                grid-template-columns: 1fr;
+            }
+
+            .org-cta {
+                margin: 20px 5% 60px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .org-process {
+                grid-template-columns: 1fr;
+            }
+
+            .org-actions {
+                flex-direction: column;
+            }
+
+            .org-btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">NEXUS<span>.</span></div>
+
+        <nav class="nav-links">
+            <a href="../index.html">الرئيسية</a>
+            <a href="about.html">عن النادي</a>
+            <a href="departments.html" class="active">الأقسام</a>
+            <a href="events.html">الفعاليات</a>
+            <a href="projects.html">المشاريع</a>
+            <a href="contact.html">تواصل معنا</a>
+        </nav>
+
+        <a href="join.html" class="nav-join">انضم إلينا</a>
+    </header>
+
+    <main>
+
+        <section class="org-hero">
+            <div class="org-hero-content reveal">
+                <span class="org-label">NEXUS / ORGANIZATION</span>
+
+                <h1>
+                    وراء كل حدث ناجح...
+                    <span>خطة وتنظيم.</span>
+                </h1>
+
+                <p>
+                    قسم التنظيم هو العقل الذي يحول الأفكار إلى أحداث حقيقية.
+                    من التخطيط وإدارة الوقت إلى تجهيز المكان وتوزيع المهام،
+                    نعمل خلف الكواليس لنصنع تجربة ناجحة لكل شخص.
+                </p>
+
+                <div class="org-actions">
+                    <a href="join.html?department=Organization" class="org-btn primary">انضم لفريق Organization</a>
+                    <a href="#specialties" class="org-btn secondary">اكتشف القسم</a>
+                </div>
+            </div>
+
+            <div class="org-visual" aria-hidden="true">⚙️</div>
+        </section>
+
+        <section class="org-section">
+            <div class="org-intro">
+                <div class="reveal">
+                    <span class="org-label">WHO WE ARE</span>
+
+                    <h2>نحول الفوضى إلى <span>نظام.</span></h2>
+
+                    <p>
+                        قسم Organization مسؤول عن التخطيط والتجهيز
+                        والتنفيذ العملي لفعاليات وأنشطة النادي.
+                    </p>
+
+                    <p>
+                        نعمل على تحديد الاحتياجات، وتجهيز الأماكن،
+                        وتوزيع المسؤوليات، وإدارة الوقت والموارد،
+                        والتأكد من سير كل شيء بالشكل المطلوب.
+                    </p>
+                </div>
+
+                <div class="org-quote reveal">
+                    <strong>Our Philosophy</strong>
+                    <p>
+                        "Great events don't happen by accident.
+                        They happen by design."
+                    </p>
+                    <p>
+                        نؤمن أن التفاصيل الصغيرة تصنع الفارق الكبير،
+                        وأن التخطيط الجيد هو بداية كل نجاح.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="org-section" id="specialties">
+            <div class="org-heading reveal">
+                <span>OUR SPECIALTIES</span>
+                <h2>ماذا نفعل داخل Organization؟</h2>
+                <p>مجالات تساعدنا على إدارة الفعاليات وتنفيذ الأفكار بكفاءة.</p>
+            </div>
+
+            <div class="org-grid">
+
+                <article class="org-card reveal">
+                    <span class="org-icon">📅</span>
+                    <h3>Event Planning</h3>
+                    <p>وضع الخطط والجداول الزمنية وتحديد أهداف الفعاليات ومتطلباتها.</p>
+                </article>
+
+                <article class="org-card reveal">
+                    <span class="org-icon">📍</span>
+                    <h3>Venue Management</h3>
+                    <p>تجهيز أماكن الفعاليات وتنظيم المقاعد والمعدات ومسارات الحركة.</p>
+                </article>
+
+                <article class="org-card reveal">
+                    <span class="org-icon">👥</span>
+                    <h3>Team Coordination</h3>
+                    <p>توزيع المهام ومتابعة فرق العمل والتأكد من وضوح المسؤوليات.</p>
+                </article>
+
+                <article class="org-card reveal">
+                    <span class="org-icon">📦</span>
+                    <h3>Logistics</h3>
+                    <p>إدارة الأدوات والمعدات والاحتياجات اللازمة لتنفيذ الأنشطة.</p>
+                </article>
+
+                <article class="org-card reveal">
+                    <span class="org-icon">⏱️</span>
+                    <h3>Time Management</h3>
+                    <p>تنظيم الوقت ومتابعة الجدول الزمني لكل مرحلة من مراحل الحدث.</p>
+                </article>
+
+                <article class="org-card reveal">
+                    <span class="org-icon">🚨</span>
+                    <h3>On-ground Operations</h3>
+                    <p>متابعة التنفيذ على أرض الواقع والتعامل مع التغييرات والمواقف الطارئة.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="org-section">
+            <div class="org-heading reveal">
+                <span>HOW WE WORK</span>
+                <h2>من التخطيط إلى التنفيذ</h2>
+                <p>كل فعالية ناجحة تمر بمراحل منظمة ومدروسة.</p>
+            </div>
+
+            <div class="org-process">
+
+                <div class="org-step reveal">
+                    <div class="org-number">01</div>
+                    <h3>Planning</h3>
+                    <p>تحديد الفكرة والأهداف والموارد المطلوبة.</p>
+                </div>
+
+                <div class="org-step reveal">
+                    <div class="org-number">02</div>
+                    <h3>Preparation</h3>
+                    <p>تجهيز المكان والأدوات وتوزيع المسؤوليات.</p>
+                </div>
+
+                <div class="org-step reveal">
+                    <div class="org-number">03</div>
+                    <h3>Execution</h3>
+                    <p>تنفيذ الخطة ومتابعة سير الحدث لحظة بلحظة.</p>
+                </div>
+
+                <div class="org-step reveal">
+                    <div class="org-number">04</div>
+                    <h3>Evaluation</h3>
+                    <p>تقييم النتائج وتحديد فرص التحسين للفعاليات القادمة.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="org-section">
+            <div class="org-heading reveal">
+                <span>OUR PROJECTS</span>
+                <h2>فعاليات يمكنك المشاركة في تنظيمها</h2>
+                <p>فرص حقيقية لاكتساب الخبرة في التخطيط والتنفيذ.</p>
+            </div>
+
+            <div class="org-projects">
+
+                <article class="org-project reveal">
+                    <h3>🎓 University Events</h3>
+                    <p>تنظيم الفعاليات الجامعية واستقبال الحضور وإدارة جدول الأنشطة.</p>
+                </article>
+
+                <article class="org-project reveal">
+                    <h3>🏆 Competitions</h3>
+                    <p>إعداد المسابقات وتنسيق مراحلها وتجهيز الأدوات وقواعد المشاركة.</p>
+                </article>
+
+                <article class="org-project reveal">
+                    <h3>💻 Technical Workshops</h3>
+                    <p>تجهيز ورش العمل التقنية وتنظيم تسجيل المشاركين والمعدات.</p>
+                </article>
+
+                <article class="org-project reveal">
+                    <h3>🚀 Conferences & Exhibitions</h3>
+                    <p>المساهمة في تنظيم المؤتمرات والمعارض وعرض مشاريع النادي.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="org-section">
+            <div class="org-heading reveal">
+                <span>YOUR SKILLS</span>
+                <h2>المهارات التي ستكتسبها</h2>
+                <p>هتتعلم إزاي تدير الوقت والموارد وتتعامل مع التفاصيل والمسؤوليات.</p>
+            </div>
+
+            <div class="org-skills reveal">
+                <div class="org-skill">Event Management</div>
+                <div class="org-skill">Planning & Organization</div>
+                <div class="org-skill">Time Management</div>
+                <div class="org-skill">Team Coordination</div>
+                <div class="org-skill">Leadership</div>
+                <div class="org-skill">Logistics Management</div>
+                <div class="org-skill">Problem Solving</div>
+                <div class="org-skill">Decision Making</div>
+                <div class="org-skill">Attention to Detail</div>
+            </div>
+        </section>
+
+        <section class="org-cta reveal">
+            <h2>هل تحب التخطيط وصناعة الأحداث؟</h2>
+            <p>
+                لو بتحب التنظيم والعمل الجماعي والتعامل مع التفاصيل،
+                عندك فرصة تكون جزءًا من الفريق الذي يجعل كل شيء يحدث.
+            </p>
+
+            <a href="join.html?department=Organization" class="org-btn primary">
+                ابدأ رحلتك مع Organization
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h2>NEXUS<span>.</span></h2>
+                <p>Think Beyond. Build Together.</p>
+            </div>
+
+            <p>© 2026 NEXUS University Club. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/animations.js"></script>
+
+</body>
+</html>

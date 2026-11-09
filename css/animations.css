@@ -1,0 +1,369 @@
+
+/* =========================================
+   NEXUS UNIVERSITY CLUB
+   Animations & Visual Effects
+========================================= */
+
+/* ---------- Glow Animation ---------- */
+
+@keyframes glowPulse {
+    0%, 100% {
+        opacity: 0.12;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.25;
+        transform: scale(1.15);
+    }
+}
+
+.glow-one {
+    animation: glowPulse 8s ease-in-out infinite;
+}
+
+.glow-two {
+    animation: glowPulse 10s ease-in-out infinite reverse;
+}
+
+/* ---------- Orbit Rotations ---------- */
+
+@keyframes rotateClockwise {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateCounterClockwise {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.orbit-one {
+    animation: rotateClockwise 18s linear infinite;
+}
+
+.orbit-two {
+    animation: rotateCounterClockwise 25s linear infinite;
+}
+
+.orbit-three {
+    animation: rotateClockwise 35s linear infinite;
+}
+
+/* ---------- Core Pulse ---------- */
+
+@keyframes corePulse {
+    0%, 100% {
+        box-shadow:
+            0 0 30px rgba(0, 229, 255, 0.15),
+            inset 0 0 30px rgba(139, 92, 246, 0.1);
+
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow:
+            0 0 65px rgba(0, 229, 255, 0.3),
+            inset 0 0 45px rgba(139, 92, 246, 0.2);
+
+        transform: scale(1.05);
+    }
+}
+
+.visual-core {
+    animation: corePulse 4s ease-in-out infinite;
+}
+
+/* ---------- Floating Cards ---------- */
+
+@keyframes floatingTop {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-14px);
+    }
+}
+
+@keyframes floatingBottom {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(13px);
+    }
+}
+
+.card-top {
+    animation: floatingTop 5s ease-in-out infinite;
+}
+
+.card-bottom {
+    animation: floatingBottom 6s ease-in-out infinite;
+}
+
+/* ---------- Particles ---------- */
+
+@keyframes particleBlink {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.7);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+.visual-particle {
+    animation: particleBlink 3s ease-in-out infinite;
+}
+
+.particle-two {
+    animation-delay: 1s;
+}
+
+.particle-three {
+    animation-delay: 2s;
+}
+
+/* ---------- Button Shine ---------- */
+
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    right: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.45),
+        transparent
+    );
+
+    transform: skewX(-25deg);
+    transition: 0.7s ease;
+}
+
+.btn-primary:hover::before {
+    right: 150%;
+}
+
+/* ---------- Floating Background ---------- */
+
+@keyframes backgroundFloat {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(20px, -25px);
+    }
+}
+
+.grid-overlay {
+    animation: backgroundFloat 15s ease-in-out infinite;
+}
+
+/* ---------- Fade In ---------- */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeRight {
+    from {
+        opacity: 0;
+        transform: translateX(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.hero-tag {
+    animation: fadeUp 0.8s ease both;
+}
+
+.hero h1 {
+    animation: fadeUp 1s ease 0.15s both;
+}
+
+.hero-description {
+    animation: fadeUp 1s ease 0.3s both;
+}
+
+.hero-buttons {
+    animation: fadeUp 1s ease 0.45s both;
+}
+
+.hero-stats {
+    animation: fadeUp 1s ease 0.6s both;
+}
+
+.hero-visual {
+    animation: fadeLeft 1.2s ease 0.2s both;
+}
+
+/* ---------- Scroll Indicator ---------- */
+
+@keyframes scrollMove {
+    0% {
+        transform: scaleX(0.3);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scaleX(0.3);
+        opacity: 0.4;
+    }
+}
+
+.scroll-line {
+    transform-origin: center;
+    animation: scrollMove 2s ease-in-out infinite;
+}
+
+/* ---------- Hover Effects ---------- */
+
+.logo-icon {
+    transition: 0.4s ease;
+}
+
+.logo:hover .logo-icon {
+    transform: rotate(360deg);
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.5);
+}
+
+.nexus-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.nexus-card::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--gradient);
+    transition: 0.4s ease;
+}
+
+.nexus-card:hover::before {
+    width: 100%;
+}
+
+/* ---------- Page Transition ---------- */
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+body {
+    animation: pageEnter 0.7s ease;
+}
+
+/* ---------- Reduced Motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Scroll Reveal */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes orbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+

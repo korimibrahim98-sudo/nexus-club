@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join NEXUS | University Club</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/animations.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: #070b18;
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+        }
+
+        .join-page {
+            min-height: 100vh;
+            padding: 65px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .join-page::before,
+        .join-page::after {
+            content: "";
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: .2;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .join-page::before {
+            background: #00d9ff;
+            top: -100px;
+            right: -100px;
+        }
+
+        .join-page::after {
+            background: #8b42ff;
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .join-container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .join-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .join-heading .tag {
+            color: #00d9ff;
+            letter-spacing: 3px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+        }
+
+        .join-heading h1 {
+            font-size: clamp(32px, 6vw, 55px);
+            margin: 15px 0;
+            font-weight: 900;
+        }
+
+        .join-heading h1 span {
+            color: #00d9ff;
+        }
+
+        .join-heading p {
+            color: #aab5ce;
+            line-height: 1.9;
+        }
+
+        .join-card {
+            background: rgba(17, 25, 48, .88);
+            border: 1px solid rgba(0, 217, 255, .2);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 20px 70px rgba(0, 0, 0, .3);
+            backdrop-filter: blur(15px);
+        }
+
+        .form-intro {
+            border-right: 3px solid #00d9ff;
+            padding-right: 15px;
+            margin-bottom: 30px;
+        }
+
+        .form-intro h2 {
+            font-size: 23px;
+            margin-bottom: 5px;
+        }
+
+        .form-intro p {
+            color: #9caac4;
+            font-size: 14px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #dce8ff;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid #293957;
+            background: #0b1328;
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: .3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #00d9ff;
+            box-shadow: 0 0 15px rgba(0, 217, 255, .12);
+        }
+
+        .form-group select option {
+            background: #0b1328;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 28px;
+            padding: 16px;
+            border: none;
+            border-radius: 13px;
+            background: linear-gradient(100deg, #00bfe8, #7954ff);
+            color: white;
+            font-family: inherit;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, .2);
+        }
+
+        .form-note {
+            color: #8391ad;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 18px;
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 25px;
+            padding: 22px;
+            border: 1px solid #00d9a5;
+            background: rgba(0, 217, 165, .08);
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .success-message h3 {
+            color: #00e6ad;
+            margin-bottom: 8px;
+        }
+
+        .success-message p {
+            color: #c0d5d1;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .back-link {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            color: #00d9ff;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .join-card {
+                padding: 25px 18px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="join-page">
+
+        <div class="join-container">
+
+            <header class="join-heading">
+                <div class="tag">NEXUS / APPLICATION SYSTEM</div>
+
+                <h1>YOUR JOURNEY <span>STARTS HERE</span></h1>
+
+                <p>
+                    كل إنجاز كبير بيبدأ بخطوة، وخطوتك الأولى مع NEXUS
+                    هي إنك تقدم طلب الانضمام وتكون جزءًا من مجتمع بيصنع المستقبل.
+                </p>
+            </header>
+
+            <section class="join-card">
+
+                <div class="form-intro">
+                    <h2>استمارة الانضمام</h2>
+                    <p>املأ بياناتك بعناية علشان نتعرف عليك بشكل أفضل.</p>
+                </div>
+
+                <form id="joinForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="fullName">الاسم بالكامل *</label>
+                            <input type="text" id="fullName"
+                                   placeholder="اكتب اسمك بالكامل" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني *</label>
+                            <input type="email" id="email"
+                                   placeholder="example@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">رقم الهاتف *</label>
+                            <input type="tel" id="phone"
+                                   placeholder="01xxxxxxxxx"
+                                   pattern="[0-9+\s-]{8,20}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="level">المستوى الدراسي *</label>
+                            <select id="level" required>
+                                <option value="">اختر مستواك</option>
+                                <option value="Level 1">Level 1</option>
+                                <option value="Level 2">Level 2</option>
+                                <option value="Level 3">Level 3</option>
+                                <option value="Level 4">Level 4</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full">
+                            <label for="department">القسم المطلوب *</label>
+                            <select id="department" required>
+                                <option value="">اختر القسم</option>
+                                <option value="Programming">Programming</option>
+                                <option value="Robotics">Robotics</option>
+                                <option value="AI">Artificial Intelligence</option>
+                                <option value="Design">Graphic Design</option>
+                                <option value="Media">Media</option>
+                                <option value="HR">Human Resources</option>
+                                <option value="PR">Public Relations</option>
+                                <option value="Organization">Organization</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full">
+                            <label for="reason">
+                                لماذا تريد الانضمام إلى هذا القسم؟ *
+                            </label>
+                            <textarea id="reason"
+                                      placeholder="احكيلنا عن اهتمامك، مهاراتك، وإيه اللي حابب تتعلمه..."
+                                      required></textarea>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        إرسال طلب الانضمام ←
+                    </button>
+
+                    <p class="form-note">
+                        * جميع البيانات المطلوبة يجب أن تكون صحيحة.
+                    </p>
+
+                </form>
+
+                <div class="success-message" id="successMessage">
+                    <h3>تم تجهيز طلبك بنجاح! ✓</h3>
+                    <p>
+                        شكرًا لاهتمامك بالانضمام إلى NEXUS.
+                        سيتم تفعيل الإرسال الفعلي وحفظ الطلب عند ربط قاعدة البيانات،
+                        وبعدها سيتم التواصل معك قريبًا.
+                    </p>
+                </div>
+
+            </section>
+
+            <a href="departments.html" class="back-link">
+                → العودة إلى الأقسام
+            </a>
+
+        </div>
+
+    </main>
+
+    <script>
+        const form = document.getElementById("joinForm");
+        const departmentSelect = document.getElementById("department");
+        const successMessage = document.getElementById("successMessage");
+
+        // Read the department from the page URL
+        const params = new URLSearchParams(window.location.search);
+        const selectedDepartment = params.get("department");
+
+        if (selectedDepartment) {
+            const option = [...departmentSelect.options].find(
+                option => option.value.toLowerCase() === selectedDepartment.toLowerCase()
+            );
+
+            if (option) {
+                departmentSelect.value = option.value;
+            }
+        }
+
+        // Frontend demo only - no data is sent or saved yet
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            successMessage.style.display = "block";
+            successMessage.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+            form.reset();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1129 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXUS | Robotics Department</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/animations.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --robot-orange: #ff7043;
+            --robot-cyan: #00e5ff;
+            --robot-dark: #080d18;
+            --robot-panel: #111b2b;
+        }
+
+        body {
+            background: var(--robot-dark);
+            overflow-x: hidden;
+        }
+
+        .robot-page {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .robot-page::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            background-image:
+                linear-gradient(#00e5ff09 1px, transparent 1px),
+                linear-gradient(90deg, #00e5ff09 1px, transparent 1px);
+            background-size: 55px 55px;
+            mask-image: linear-gradient(to bottom, black, transparent 85%);
+        }
+
+        /* HERO */
+
+        .robot-hero {
+            min-height: 90vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 140px 7% 90px;
+            background:
+                radial-gradient(ellipse at 15% 50%, #ff704326, transparent 35%),
+                radial-gradient(ellipse at 85% 30%, #00e5ff1c, transparent 35%),
+                linear-gradient(135deg, #080d18, #101a2b);
+        }
+
+        .robot-hero::after {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border: 1px solid #00e5ff22;
+            border-radius: 50%;
+            left: -150px;
+            bottom: -180px;
+            box-shadow:
+                0 0 0 35px #00e5ff08,
+                0 0 0 70px #00e5ff05;
+        }
+
+        .robot-hero-content {
+            max-width: 720px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .robot-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            border: 1px solid #ff704355;
+            border-radius: 30px;
+            color: #ff9879;
+            background: #ff704315;
+            font-family: Orbitron, sans-serif;
+            font-size: .75rem;
+            letter-spacing: 2px;
+            margin-bottom: 28px;
+        }
+
+        .robot-label::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--robot-orange);
+            box-shadow: 0 0 12px var(--robot-orange);
+        }
+
+        .robot-hero h1 {
+            font-size: clamp(3rem, 7vw, 6.5rem);
+            line-height: 1.15;
+            margin-bottom: 25px;
+            color: white;
+            font-weight: 900;
+        }
+
+        .robot-hero h1 span {
+            display: block;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--robot-orange);
+            text-shadow: 0 0 35px #ff704325;
+        }
+
+        .robot-hero p {
+            color: #aab8cc;
+            font-size: 1.1rem;
+            line-height: 2.1;
+            max-width: 650px;
+            margin-bottom: 35px;
+        }
+
+        .robot-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .robot-btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: .3s;
+        }
+
+        .robot-btn.primary {
+            background: linear-gradient(120deg, #ff7043, #ff9b50);
+            color: #160d09;
+            box-shadow: 0 8px 30px #ff704330;
+        }
+
+        .robot-btn.secondary {
+            border: 1px solid #ffffff35;
+            color: white;
+            background: #ffffff08;
+        }
+
+        .robot-btn:hover {
+            transform: translateY(-5px);
+        }
+
+        /* ROBOT VISUAL */
+
+        .robot-visual {
+            position: absolute;
+            left: 7%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 350px;
+            height: 350px;
+            display: grid;
+            place-items: center;
+        }
+
+        .robot-orbit {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #00e5ff45;
+            border-radius: 50%;
+            animation: robotSpin 18s linear infinite;
+        }
+
+        .robot-orbit::before,
+        .robot-orbit::after {
+            content: "";
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--robot-cyan);
+            box-shadow: 0 0 20px var(--robot-cyan);
+        }
+
+        .robot-orbit::before {
+            top: 30px;
+            left: 55px;
+        }
+
+        .robot-orbit::after {
+            bottom: 45px;
+            right: 25px;
+            background: var(--robot-orange);
+            box-shadow: 0 0 20px var(--robot-orange);
+        }
+
+        .robot-orbit.two {
+            width: 75%;
+            height: 75%;
+            border-color: #ff704355;
+            animation-direction: reverse;
+            animation-duration: 12s;
+        }
+
+        .robot-symbol {
+            font-size: 9rem;
+            filter: drop-shadow(0 0 25px #ff704355);
+            animation: robotFloat 4s ease-in-out infinite;
+        }
+
+        .robot-hud {
+            position: absolute;
+            bottom: 15px;
+            right: 0;
+            padding: 12px 16px;
+            border: 1px solid #00e5ff44;
+            border-radius: 10px;
+            background: #081321dd;
+            color: var(--robot-cyan);
+            font-family: Orbitron, sans-serif;
+            font-size: .7rem;
+            direction: ltr;
+        }
+
+        @keyframes robotSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes robotFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* COMMON */
+
+        .robot-section {
+            width: min(1150px, 90%);
+            margin: auto;
+            padding: 100px 0;
+        }
+
+        .robot-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .robot-heading span {
+            color: var(--robot-orange);
+            font-family: Orbitron, sans-serif;
+            font-size: .8rem;
+            letter-spacing: 2px;
+        }
+
+        .robot-heading h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: white;
+            margin: 15px 0;
+        }
+
+        .robot-heading p {
+            color: #9baac0;
+            line-height: 2;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        /* ABOUT */
+
+        .robot-about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .robot-about-text h3 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .robot-about-text p {
+            color: #aab8cc;
+            line-height: 2.1;
+            margin-bottom: 15px;
+        }
+
+        .robot-about-art {
+            min-height: 350px;
+            border-radius: 25px;
+            border: 1px solid #ff704344;
+            background:
+                radial-gradient(circle at center, #ff704328, transparent 55%),
+                linear-gradient(145deg, #17263a, #0c1422);
+            display: grid;
+            place-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .robot-about-art::before {
+            content: "";
+            position: absolute;
+            inset: 20px;
+            border: 1px dashed #00e5ff45;
+            border-radius: 20px;
+        }
+
+        .robot-about-art span {
+            font-size: 8rem;
+            filter: drop-shadow(0 0 25px #ff704355);
+            animation: robotFloat 4s ease-in-out infinite;
+        }
+
+        /* FIELDS */
+
+        .robot-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .robot-field {
+            background: linear-gradient(145deg, #142238, #0c1422);
+            border: 1px solid #ffffff13;
+            border-radius: 18px;
+            padding: 27px;
+            transition: .35s;
+        }
+
+        .robot-field:hover {
+            transform: translateY(-8px);
+            border-color: var(--robot-cyan);
+            box-shadow: 0 15px 35px #00e5ff12;
+        }
+
+        .robot-field .field-icon {
+            font-size: 2.3rem;
+            margin-bottom: 18px;
+        }
+
+        .robot-field h3 {
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .robot-field p {
+            color: #9baac0;
+            line-height: 1.9;
+            font-size: .92rem;
+        }
+
+        /* ROADMAP */
+
+        .robot-roadmap {
+            position: relative;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .robot-roadmap::before {
+            content: "";
+            position: absolute;
+            right: 22px;
+            top: 15px;
+            bottom: 15px;
+            width: 2px;
+            background: linear-gradient(var(--robot-orange), var(--robot-cyan));
+        }
+
+        .roadmap-item {
+            position: relative;
+            padding: 0 65px 40px 0;
+        }
+
+        .roadmap-number {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-weight: bold;
+            background: #18283b;
+            border: 2px solid var(--robot-orange);
+            z-index: 1;
+        }
+
+        .roadmap-item h3 {
+            color: var(--robot-cyan);
+            margin-bottom: 10px;
+        }
+
+        .roadmap-item p {
+            color: #aab8cc;
+            line-height: 1.9;
+        }
+
+        /* TOOLS */
+
+        .robot-tools {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .robot-tool {
+            padding: 15px 23px;
+            border-radius: 12px;
+            border: 1px solid #ffffff20;
+            background: #111b2b;
+            color: #dce8f5;
+            transition: .3s;
+        }
+
+        .robot-tool:hover {
+            border-color: var(--robot-orange);
+            color: var(--robot-orange);
+            transform: translateY(-4px);
+        }
+
+        /* PROJECTS */
+
+        .robot-projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+        }
+
+        .robot-project {
+            overflow: hidden;
+            border-radius: 18px;
+            border: 1px solid #ffffff17;
+            background: #111b2b;
+            transition: .35s;
+        }
+
+        .robot-project:hover {
+            transform: translateY(-7px);
+            border-color: #ff704377;
+        }
+
+        .project-art {
+            min-height: 180px;
+            display: grid;
+            place-items: center;
+            font-size: 5rem;
+            background:
+                radial-gradient(circle, #ff70432b, transparent 65%),
+                linear-gradient(135deg, #17263a, #0a1322);
+        }
+
+        .project-info {
+            padding: 23px;
+        }
+
+        .project-info h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            color: #9baac0;
+            line-height: 1.9;
+            font-size: .92rem;
+        }
+
+        /* SKILLS */
+
+        .robot-skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .robot-skill {
+            padding: 20px;
+            border-radius: 13px;
+            background: #101b2b;
+            border-right: 3px solid var(--robot-cyan);
+            color: #dce8f5;
+        }
+
+        .robot-skill span {
+            color: var(--robot-orange);
+            margin-left: 8px;
+        }
+
+        /* TEAM */
+
+        .robot-team-box {
+            padding: 45px;
+            border-radius: 22px;
+            background:
+                radial-gradient(circle at 90% 10%, #ff704321, transparent 35%),
+                #111b2b;
+            border: 1px solid #ffffff18;
+        }
+
+        .robot-team-box h3 {
+            color: white;
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+        }
+
+        .robot-team-box > p {
+            color: #aab8cc;
+            line-height: 2;
+            margin-bottom: 25px;
+        }
+
+        .robot-team-roles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 15px;
+        }
+
+        .robot-role {
+            padding: 18px;
+            background: #ffffff08;
+            border: 1px solid #ffffff12;
+            border-radius: 12px;
+        }
+
+        .robot-role h4 {
+            color: var(--robot-cyan);
+            margin-bottom: 8px;
+        }
+
+        .robot-role p {
+            color: #aab8cc;
+            font-size: .9rem;
+            line-height: 1.8;
+        }
+
+        /* CTA */
+
+        .robot-join {
+            width: min(1050px, 90%);
+            margin: 30px auto 100px;
+            padding: 65px 25px;
+            text-align: center;
+            border-radius: 25px;
+            border: 1px solid #ff704355;
+            background:
+                radial-gradient(circle at 50% 0%, #ff704328, transparent 60%),
+                #111b2b;
+        }
+
+        .robot-join h2 {
+            color: white;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 15px;
+        }
+
+        .robot-join p {
+            color: #aab8cc;
+            line-height: 2;
+            margin-bottom: 28px;
+        }
+
+        .robot-back {
+            display: inline-block;
+            color: var(--robot-cyan);
+            text-decoration: none;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .robot-visual {
+                opacity: .16;
+                left: -80px;
+            }
+
+            .robot-hero-content {
+                max-width: 100%;
+            }
+
+            .robot-about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .robot-hero {
+                min-height: 75vh;
+                padding: 120px 6% 70px;
+            }
+
+            .robot-visual {
+                width: 250px;
+                height: 250px;
+                left: -90px;
+            }
+
+            .robot-symbol {
+                font-size: 6rem;
+            }
+
+            .robot-section {
+                padding: 65px 0;
+            }
+
+            .robot-team-box {
+                padding: 25px;
+            }
+
+            .robot-buttons {
+                flex-direction: column;
+            }
+
+            .robot-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="robot-page">
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">NEXUS<span>.</span></a>
+
+            <nav class="nav-links">
+                <a href="../index.html">الرئيسية</a>
+                <a href="about.html">عن النادي</a>
+                <a href="departments.html" class="active">الأقسام</a>
+                <a href="events.html">الفعاليات</a>
+                <a href="projects.html">المشاريع</a>
+                <a href="members.html">الأعضاء</a>
+                <a href="contact.html">تواصل معنا</a>
+            </nav>
+
+            <a href="join.html" class="nav-cta">انضم إلينا</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="robot-hero">
+
+        <div class="robot-hero-content reveal">
+
+            <div class="robot-label">NEXUS // ROBOTICS DEPARTMENT</div>
+
+            <h1>
+                BUILD THE
+                <span>FUTURE.</span>
+            </h1>
+
+            <p>
+                مش مجرد روبوت بيتحرك...
+                إحنا بنصمم ونبرمج أنظمة ذكية قادرة على الإحساس
+                بالبيئة المحيطة، واتخاذ القرارات، وتنفيذ المهام.
+                من أول دائرة إلكترونية بسيطة لحد روبوت مستقل
+                قادر على تنفيذ مهمة كاملة.
+            </p>
+
+            <div class="robot-buttons">
+                <a href="#about-robotics" class="robot-btn primary">
+                    اكتشف عالم Robotics
+                </a>
+
+                <a href="#robot-roadmap" class="robot-btn secondary">
+                    ابدأ رحلة التعلم
+                </a>
+            </div>
+
+        </div>
+
+        <div class="robot-visual">
+            <div class="robot-orbit"></div>
+            <div class="robot-orbit two"></div>
+            <div class="robot-symbol">🤖</div>
+            <div class="robot-hud">SYSTEM ONLINE // NEXUS 001</div>
+        </div>
+
+    </section>
+
+    <!-- ABOUT -->
+    <section class="robot-section" id="about-robotics">
+
+        <div class="robot-heading reveal">
+            <span>01 // ABOUT US</span>
+            <h2>ما هو عالم Robotics؟</h2>
+            <p>
+                عالم يجمع بين أكثر من تخصص لصناعة أنظمة
+                قادرة على التفاعل مع العالم الحقيقي.
+            </p>
+        </div>
+
+        <div class="robot-about-grid">
+
+            <div class="robot-about-text reveal">
+                <h3>من الفكرة إلى روبوت حقيقي</h3>
+
+                <p>
+                    Robotics هو المجال الذي يجمع بين البرمجة،
+                    والإلكترونيات، والميكانيكا، وأنظمة التحكم
+                    لتصميم وبناء الروبوتات.
+                </p>
+
+                <p>
+                    داخل قسم Robotics في NEXUS، يتعلم الأعضاء
+                    كيف يفكرون كمصممي أنظمة، ويحولون المشكلات
+                    الواقعية إلى حلول عملية باستخدام التكنولوجيا.
+                </p>
+
+                <p>
+                    هدفنا مش إننا نشغل موتور أو نضيء LED فقط،
+                    لكن إننا نفهم النظام بالكامل: كيف يستقبل
+                    البيانات؟ كيف يحللها؟ وكيف ينفذ القرار؟
+                </p>
+            </div>
+
+            <div class="robot-about-art reveal">
+                <span>🦾</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FIELDS -->
+    <section class="robot-section">
+
+        <div class="robot-heading reveal">
+            <span>02 // CORE FIELDS</span>
+            <h2>مجالات Robotics</h2>
+            <p>
+                الروبوتات مش تخصص واحد، لكنها مجموعة مجالات
+                بتتكامل مع بعضها علشان تصنع نظامًا كاملًا.
+            </p>
+        </div>
+
+        <div class="robot-fields">
+
+            <article class="robot-field reveal">
+                <div class="field-icon">⚡</div>
+                <h3>Electronics</h3>
+                <p>
+                    فهم الدوائر الإلكترونية، توصيل المكونات،
+                    مصادر الطاقة، والمحركات وأجهزة الاستشعار.
+                </p>
+            </article>
+
+            <article class="robot-field reveal">
+                <div class="field-icon">💻</div>
+                <h3>Embedded Systems</h3>
+                <p>
+                    برمجة المتحكمات الدقيقة مثل Arduino وESP32
+                    للتعامل مع الأجهزة والمكونات الإلكترونية.
+                </p>
+            </article>
+
+            <article class="robot-field reveal">
+                <div class="field-icon">⚙️</div>
+                <h3>Mechanical Design</h3>
+                <p>
+                    تصميم هيكل الروبوت، اختيار العجلات،
+                    المحركات، الأذرع، وأجزاء الحركة.
+                </p>
+            </article>
+
+            <article class="robot-field reveal">
+                <div class="field-icon">📡</div>
+                <h3>Sensors & IoT</h3>
+                <p>
+                    استخدام الحساسات لجمع البيانات وربط
+                    الروبوت بالأنظمة والشبكات الذكية.
+                </p>
+            </article>
+
+            <article class="robot-field reveal">
+                <div class="field-icon">🧭</div>
+                <h3>Navigation</h3>
+                <p>
+                    مساعدة الروبوت على تحديد موقعه وفهم
+                    الاتجاهات والتحرك نحو أهداف محددة.
+                </p>
+            </article>
+
+            <article class="robot-field reveal">
+                <div class="field-icon">🧠</div>
+                <h3>Control Systems</h3>
+                <p>
+                    تصميم منطق التحكم في الحركة والتعامل
+                    مع المدخلات واتخاذ القرارات المناسبة.
+                </p>
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="robot-section" id="robot-roadmap">
+
+        <div class="robot-heading reveal">
+            <span>03 // LEARNING PATH</span>
+            <h2>رحلتك في تعلم Robotics</h2>
+            <p>
+                مش مطلوب تكون خبير من البداية.
+                كل مرحلة بتبني على اللي قبلها لحد ما تقدر
+                تنفذ مشروعك بنفسك.
+            </p>
+        </div>
+
+        <div class="robot-roadmap">
+
+            <div class="roadmap-item reveal">
+                <div class="roadmap-number">01</div>
+                <h3>Foundation Basics</h3>
+                <p>
+                    التعرف على أساسيات الكهرباء والإلكترونيات،
+                    المكونات المختلفة، وطريقة قراءة الدوائر البسيطة.
+                </p>
+            </div>
+
+            <div class="roadmap-item reveal">
+                <div class="roadmap-number">02</div>
+                <h3>Programming Fundamentals</h3>
+                <p>
+                    تعلم أساسيات C/C++، المتغيرات، الشروط،
+                    الحلقات، الدوال، وكيفية كتابة كود للمتحكمات.
+                </p>
+            </div>
+
+            <div class="roadmap-item reveal">
+                <div class="roadmap-number">03</div>
+                <h3>Microcontrollers</h3>
+                <p>
+                    التعامل مع Arduino وESP32،
+                    وقراءة الحساسات والتحكم في المحركات والسيرفو.
+                </p>
+            </div>
+
+            <div class="roadmap-item reveal">
+                <div class="roadmap-number">04</div>
+                <h3>Robot Building</h3>
+                <p>
+                    تجميع هيكل الروبوت، توصيل الدوائر،
+                    واختبار الحركة والتحكم في المكونات.
+                </p>
+            </div>
+
+            <div class="roadmap-item reveal">
+                <div class="roadmap-number">05</div>
+                <h3>Autonomous Systems</h3>
+                <p>
+                    تطوير أنظمة تستطيع قراءة البيئة المحيطة،
+                    وتجنب العوائق، وتنفيذ المهام بصورة مستقلة.
+                </p>
+            </div>
+
+            <div class="roadmap-item reveal">
+                <div class="roadmap-number">06</div>
+                <h3>Real World Projects</h3>
+                <p>
+                    العمل داخل فريق على مشروع متكامل،
+                    من التخطيط والتصميم حتى الاختبار والعرض النهائي.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- TOOLS -->
+    <section class="robot-section">
+
+        <div class="robot-heading reveal">
+            <span>04 // TECHNOLOGY STACK</span>
+            <h2>الأدوات والتقنيات</h2>
+            <p>
+                مجموعة من الأدوات التي يمكن استخدامها
+                في التعلم والتصميم وتنفيذ مشاريع الروبوتات.
+            </p>
+        </div>
+
+        <div class="robot-tools reveal">
+            <div class="robot-tool">Arduino</div>
+            <div class="robot-tool">ESP32</div>
+            <div class="robot-tool">C / C++</div>
+            <div class="robot-tool">Sensors</div>
+            <div class="robot-tool">Servo Motors</div>
+            <div class="robot-tool">DC Motors</div>
+            <div class="robot-tool">Motor Drivers</div>
+            <div class="robot-tool">IoT</div>
+            <div class="robot-tool">CAD Design</div>
+            <div class="robot-tool">Wireless Communication</div>
+            <div class="robot-tool">Control Systems</div>
+            <div class="robot-tool">GPS Modules</div>
+        </div>
+
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="robot-section">
+
+        <div class="robot-heading reveal">
+            <span>05 // PROJECT IDEAS</span>
+            <h2>مشاريع ممكن تنفذها</h2>
+            <p>
+                التعلم الحقيقي بيبدأ لما تحول اللي اتعلمته
+                إلى مشروع تقدر تشوفه وتختبره بنفسك.
+            </p>
+        </div>
+
+        <div class="robot-projects">
+
+            <article class="robot-project reveal">
+                <div class="project-art">🚗</div>
+                <div class="project-info">
+                    <h3>Smart Obstacle Avoider</h3>
+                    <p>
+                        روبوت متحرك يستخدم الحساسات
+                        لاكتشاف العوائق وتغيير اتجاهه تلقائيًا.
+                    </p>
+                </div>
+            </article>
+
+            <article class="robot-project reveal">
+                <div class="project-art">🦾</div>
+                <div class="project-info">
+                    <h3>Robotic Arm</h3>
+                    <p>
+                        ذراع روبوتية متعددة المحاور
+                        تستطيع تحريك الأشياء وتنفيذ مهام محددة.
+                    </p>
+                </div>
+            </article>
+
+            <article class="robot-project reveal">
+                <div class="project-art">📦</div>
+                <div class="project-info">
+                    <h3>Smart Delivery Robot</h3>
+                    <p>
+                        روبوت لوجستي يتحرك لنقل العناصر
+                        بين نقاط مختلفة داخل بيئة العمل.
+                    </p>
+                </div>
+            </article>
+
+            <article class="robot-project reveal">
+                <div class="project-art">🤝</div>
+                <div class="project-info">
+                    <h3>Cooperative Robot Fleet</h3>
+                    <p>
+                        مجموعة روبوتات تتعاون مع بعضها
+                        لتوزيع المهام وتنفيذ عمليات لوجستية مشتركة.
+                    </p>
+                </div>
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- SKILLS -->
+    <section class="robot-section">
+
+        <div class="robot-heading reveal">
+            <span>06 // YOUR SKILLS</span>
+            <h2>إيه المهارات اللي هتكتسبها؟</h2>
+            <p>
+                مش بس هتتعلم تستخدم مكونات إلكترونية،
+                لكن هتطور طريقة تفكيرك في حل المشكلات.
+            </p>
+        </div>
+
+        <div class="robot-skills">
+
+            <div class="robot-skill reveal">
+                <span>✦</span> Problem Solving
+            </div>
+
+            <div class="robot-skill reveal">
+                <span>✦</span> Programming
+            </div>
+
+            <div class="robot-skill reveal">
+                <span>✦</span> Circuit Design
+            </div>
+
+            <div class="robot-skill reveal">
+                <span>✦</span> Hardware Integration
+            </div>
+
+            <div class="robot-skill reveal">
+                <span>✦</span> Teamwork
+            </div>
+
+            <div class="robot-skill reveal">
+                <span>✦</span> Critical Thinking
+            </div>
+
+            <div class="robot-skill reveal">
+                <span>✦</span> Project Management
+            </div>
+
+            <div class="robot-skill reveal">
+                <span>✦</span> Testing & Debugging
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- TEAM STRUCTURE -->
+    <section class="robot-section">
+
+        <div class="robot-heading reveal">
+            <span>07 // TEAM STRUCTURE</span>
+            <h2>إزاي بنشتغل كفريق؟</h2>
+            <p>
+                المشاريع الكبيرة محتاجة تعاون بين تخصصات مختلفة،
+                وكل عضو ليه دور مهم في نجاح النظام بالكامل.
+            </p>
+        </div>
+
+        <div class="robot-team-box reveal">
+
+            <h3>One Team. Multiple Disciplines.</h3>
+
+            <p>
+                يمكن تقسيم فريق Robotics إلى مجموعات عمل
+                حسب طبيعة المشروع وحجمه، مع وجود تعاون مستمر
+                بين جميع الأعضاء.
+            </p>
+
+            <div class="robot-team-roles">
+
+                <div class="robot-role">
+                    <h4>Electronics Team</h4>
+                    <p>
+                        مسؤول عن الدوائر، التوصيلات،
+                        الطاقة والحساسات.
+                    </p>
+                </div>
+
+                <div class="robot-role">
+                    <h4>Hardware Team</h4>
+                    <p>
+                        مسؤول عن الهيكل الميكانيكي،
+                        المحركات والتجميع.
+                    </p>
+                </div>
+
+                <div class="robot-role">
+                    <h4>Embedded Team</h4>
+                    <p>
+                        مسؤول عن برمجة المتحكمات
+                        وربط المكونات ببعضها.
+                    </p>
+                </div>
+
+                <div class="robot-role">
+                    <h4>IoT & Integration</h4>
+                    <p>
+                        مسؤول عن الاتصال بين الأنظمة
+                        ولوحات التحكم وتبادل البيانات.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- JOIN -->
+    <section class="robot-join reveal">
+
+        <div class="robot-label">YOUR NEXT MISSION</div>
+
+        <h2>Ready to Build Something Amazing?</h2>
+
+        <p>
+            مش لازم تكون خبير في الإلكترونيات أو البرمجة.
+            المهم يكون عندك فضول تتعلم، وشغف تجرب،
+            واستعداد تشتغل مع فريق بيصنع أفكار حقيقية.
+        </p>
+
+        <a href="join.html?department=Robotics">
+    انضم إلى القسم
+</a>
+
+        <br>
+
+        <a href="departments.html" class="robot-back">
+            ← العودة إلى جميع الأقسام
+        </a>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 NEXUS University Club. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</div>
+
+<script src="../js/main.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/animations.js"></script>
+
+</body>
+</html>

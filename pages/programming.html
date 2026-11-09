@@ -1,0 +1,1055 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming | NEXUS Club</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/animations.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --pg-main: #00e5ff;
+            --pg-purple: #9865ff;
+            --pg-bg: #070b18;
+            --pg-card: #101a31;
+            --pg-muted: #a5b1ca;
+        }
+
+        body {
+            background: var(--pg-bg);
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .pg-page {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pg-container {
+            width: min(1150px, 90%);
+            margin: auto;
+        }
+
+        .pg-section {
+            padding: 95px 0;
+            position: relative;
+        }
+
+        .pg-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0,229,255,.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,229,255,.035) 1px, transparent 1px);
+            background-size: 45px 45px;
+            mask-image: linear-gradient(to bottom, black, transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .pg-glow {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            filter: blur(130px);
+            opacity: .14;
+            pointer-events: none;
+        }
+
+        .pg-glow.one {
+            background: var(--pg-main);
+            top: 100px;
+            right: -150px;
+        }
+
+        .pg-glow.two {
+            background: var(--pg-purple);
+            bottom: 200px;
+            left: -150px;
+        }
+
+        .pg-hero {
+            min-height: 720px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 100px 0;
+        }
+
+        .pg-hero-content {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            align-items: center;
+            gap: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pg-label {
+            display: inline-block;
+            color: var(--pg-main);
+            border: 1px solid rgba(0,229,255,.3);
+            background: rgba(0,229,255,.06);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        .pg-hero h1 {
+            font-size: clamp(42px, 6vw, 76px);
+            line-height: 1.3;
+            margin: 25px 0;
+            font-weight: 900;
+        }
+
+        .pg-hero h1 span {
+            color: var(--pg-main);
+            text-shadow: 0 0 30px rgba(0,229,255,.3);
+        }
+
+        .pg-hero p {
+            color: var(--pg-muted);
+            line-height: 2;
+            font-size: 16px;
+            max-width: 600px;
+        }
+
+        .pg-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .pg-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 27px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: .3s;
+        }
+
+        .pg-btn.primary {
+            color: #06111c;
+            background: linear-gradient(100deg, #00e5ff, #76cfff);
+        }
+
+        .pg-btn.secondary {
+            color: white;
+            border: 1px solid #34425f;
+            background: rgba(255,255,255,.03);
+        }
+
+        .pg-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,229,255,.17);
+        }
+
+        /* Code Window */
+
+        .pg-code-window {
+            background: rgba(12,20,39,.95);
+            border: 1px solid rgba(0,229,255,.25);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0,0,0,.4);
+            transform: perspective(1000px) rotateY(-5deg);
+            animation: pg-float 5s ease-in-out infinite;
+        }
+
+        .pg-window-top {
+            padding: 16px;
+            background: #151f36;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #26334e;
+        }
+
+        .pg-dots {
+            display: flex;
+            gap: 7px;
+        }
+
+        .pg-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+
+        .pg-dot.red { background: #ff5d68; }
+        .pg-dot.yellow { background: #ffc857; }
+        .pg-dot.green { background: #36d99b; }
+
+        .pg-window-title {
+            color: #8795b1;
+            font-size: 11px;
+            direction: ltr;
+            font-family: monospace;
+        }
+
+        .pg-code {
+            direction: ltr;
+            text-align: left;
+            padding: 30px 20px;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 2.2;
+            overflow-x: auto;
+            color: #d7e5ff;
+        }
+
+        .pg-code .comment { color: #647c99; }
+        .pg-code .keyword { color: #c792ea; }
+        .pg-code .function { color: #82aaff; }
+        .pg-code .string { color: #c3e88d; }
+        .pg-code .variable { color: #f78c6c; }
+        .pg-code .number { color: #ffcb6b; }
+
+        .pg-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 17px;
+            background: var(--pg-main);
+            vertical-align: middle;
+            animation: pg-blink 1s infinite;
+        }
+
+        @keyframes pg-blink {
+            50% { opacity: 0; }
+        }
+
+        @keyframes pg-float {
+            0%,100% { transform: perspective(1000px) rotateY(-5deg) translateY(0); }
+            50% { transform: perspective(1000px) rotateY(-5deg) translateY(-13px); }
+        }
+
+        /* Statistics */
+
+        .pg-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: -30px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .pg-stat {
+            text-align: center;
+            padding: 25px 15px;
+            background: rgba(17,28,51,.85);
+            border: 1px solid #253654;
+            border-radius: 16px;
+        }
+
+        .pg-stat strong {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--pg-main);
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .pg-stat span {
+            color: var(--pg-muted);
+            font-size: 13px;
+        }
+
+        /* Section headings */
+
+        .pg-heading {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .pg-heading small {
+            color: var(--pg-main);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 3px;
+            font-size: 11px;
+        }
+
+        .pg-heading h2 {
+            font-size: clamp(28px, 4vw, 43px);
+            margin: 15px 0;
+            font-weight: 900;
+        }
+
+        .pg-heading p {
+            color: var(--pg-muted);
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.9;
+        }
+
+        /* About */
+
+        .pg-about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .pg-about-text h3 {
+            font-size: 29px;
+            margin-bottom: 18px;
+        }
+
+        .pg-about-text p {
+            color: var(--pg-muted);
+            line-height: 2.1;
+            margin-bottom: 15px;
+        }
+
+        .pg-about-visual {
+            min-height: 330px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, rgba(0,229,255,.12), transparent 65%);
+            border: 1px solid rgba(0,229,255,.12);
+            border-radius: 25px;
+            font-family: monospace;
+            font-size: clamp(70px, 10vw, 120px);
+            color: var(--pg-main);
+            text-shadow: 0 0 45px rgba(0,229,255,.4);
+        }
+
+        /* Cards */
+
+        .pg-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .pg-card {
+            background: linear-gradient(145deg, #131f39, #0c1428);
+            border: 1px solid #253652;
+            border-radius: 19px;
+            padding: 27px;
+            transition: .35s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pg-card::after {
+            content: "";
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: var(--pg-main);
+            opacity: .04;
+            filter: blur(60px);
+            top: -30px;
+            left: -30px;
+        }
+
+        .pg-card:hover {
+            transform: translateY(-9px);
+            border-color: var(--pg-main);
+            box-shadow: 0 15px 40px rgba(0,229,255,.08);
+        }
+
+        .pg-card-icon {
+            width: 55px;
+            height: 55px;
+            display: grid;
+            place-items: center;
+            background: rgba(0,229,255,.1);
+            border: 1px solid rgba(0,229,255,.2);
+            border-radius: 14px;
+            color: var(--pg-main);
+            font-family: monospace;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .pg-card h3 {
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .pg-card p {
+            color: var(--pg-muted);
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+        /* Roadmap */
+
+        .pg-roadmap {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .pg-roadmap-item {
+            display: grid;
+            grid-template-columns: 65px 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+            align-items: start;
+        }
+
+        .pg-step {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            background: rgba(0,229,255,.1);
+            border: 1px solid var(--pg-main);
+            border-radius: 15px;
+            color: var(--pg-main);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        .pg-roadmap-content {
+            background: #111d35;
+            padding: 22px;
+            border-radius: 15px;
+            border: 1px solid #273957;
+        }
+
+        .pg-roadmap-content h3 {
+            margin-bottom: 8px;
+        }
+
+        .pg-roadmap-content p {
+            color: var(--pg-muted);
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        /* Technologies */
+
+        .pg-tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .pg-tech {
+            padding: 14px 25px;
+            border: 1px solid #2a3a58;
+            border-radius: 12px;
+            background: #101a30;
+            color: #dceaff;
+            font-family: monospace;
+            font-size: 15px;
+            transition: .3s;
+        }
+
+        .pg-tech:hover {
+            border-color: var(--pg-main);
+            color: var(--pg-main);
+            transform: translateY(-4px);
+        }
+
+        /* Projects */
+
+        .pg-project {
+            border-radius: 18px;
+            padding: 25px;
+            background: linear-gradient(135deg, #172440, #0c1428);
+            border: 1px solid #263a59;
+        }
+
+        .pg-project .project-type {
+            color: var(--pg-main);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        .pg-project h3 {
+            margin: 13px 0;
+        }
+
+        .pg-project p {
+            color: var(--pg-muted);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        /* Skills */
+
+        .pg-skills {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .pg-skill {
+            background: #111d35;
+            padding: 22px;
+            border-radius: 15px;
+            border: 1px solid #263957;
+        }
+
+        .pg-skill h3 {
+            color: var(--pg-main);
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .pg-skill p {
+            color: var(--pg-muted);
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        /* Final CTA */
+
+        .pg-final {
+            text-align: center;
+            background: linear-gradient(130deg, rgba(0,229,255,.09), rgba(152,101,255,.1));
+            border: 1px solid rgba(0,229,255,.2);
+            border-radius: 25px;
+            padding: 60px 25px;
+        }
+
+        .pg-final h2 {
+            font-size: clamp(27px, 4vw, 42px);
+            margin-bottom: 15px;
+        }
+
+        .pg-final p {
+            color: var(--pg-muted);
+            line-height: 1.9;
+            margin-bottom: 25px;
+        }
+
+        .pg-footer {
+            text-align: center;
+            padding: 35px 15px;
+            color: #8190ac;
+            border-top: 1px solid #202d46;
+            font-size: 13px;
+        }
+
+        .pg-footer span {
+            color: var(--pg-main);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        @media(max-width: 850px) {
+            .pg-hero-content,
+            .pg-about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pg-code-window {
+                transform: none;
+                max-width: 600px;
+                width: 100%;
+                margin: auto;
+            }
+
+            .pg-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pg-hero {
+                min-height: auto;
+            }
+        }
+
+        @media(max-width: 550px) {
+            .pg-section {
+                padding: 65px 0;
+            }
+
+            .pg-cards,
+            .pg-skills {
+                grid-template-columns: 1fr;
+            }
+
+            .pg-stats {
+                grid-template-columns: 1fr;
+                margin-top: 0;
+            }
+
+            .pg-hero h1 {
+                font-size: 42px;
+            }
+
+            .pg-buttons {
+                flex-direction: column;
+            }
+
+            .pg-btn {
+                width: 100%;
+            }
+
+            .pg-code {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="pg-page">
+
+    <div class="pg-grid-bg"></div>
+    <div class="pg-glow one"></div>
+    <div class="pg-glow two"></div>
+
+    <!-- HERO -->
+
+    <section class="pg-hero">
+        <div class="pg-container pg-hero-content">
+
+            <div class="pg-hero-text">
+                <span class="pg-label">NEXUS / DEPARTMENT 001</span>
+
+                <h1>
+                    THINK IT.<br>
+                    CODE IT.<br>
+                    <span>BUILD IT.</span>
+                </h1>
+
+                <p>
+                    أهلاً بيك في عالم البرمجة داخل NEXUS.
+                    هنا بنحوّل الأفكار إلى حلول رقمية حقيقية،
+                    وبنتعلم إزاي نبني مواقع وتطبيقات وأنظمة ذكية
+                    باستخدام أحدث تقنيات تطوير البرمجيات.
+                </p>
+
+                <div class="pg-buttons">
+                    <a href="join.html?department=Programming" class="pg-btn primary">
+                        انضم إلى القسم ←
+                    </a>
+
+                    <a href="#about" class="pg-btn secondary">
+                        اكتشف القسم
+                    </a>
+                </div>
+            </div>
+
+            <div class="pg-code-window">
+
+                <div class="pg-window-top">
+                    <div class="pg-dots">
+                        <span class="pg-dot red"></span>
+                        <span class="pg-dot yellow"></span>
+                        <span class="pg-dot green"></span>
+                    </div>
+
+                    <span class="pg-window-title">nexus.js</span>
+                </div>
+
+                <div class="pg-code">
+                    <div><span class="comment">// Welcome to NEXUS</span></div>
+                    <div><span class="keyword">const</span> <span class="variable">future</span> = {</div>
+                    <div>&nbsp;&nbsp;ideas: <span class="string">"Unlimited"</span>,</div>
+                    <div>&nbsp;&nbsp;skills: [</div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Web Development"</span>,</div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Problem Solving"</span>,</div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Software Engineering"</span></div>
+                    <div>&nbsp;&nbsp;],</div>
+                    <div>&nbsp;&nbsp;dreams: <span class="keyword">true</span></div>
+                    <div>};</div>
+                    <br>
+                    <div><span class="keyword">function</span> <span class="function">buildFuture</span>() {</div>
+                    <div>&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"Start with NEXUS"</span>;</div>
+                    <div>}</div>
+                    <br>
+                    <div><span class="function">buildFuture</span>(); <span class="pg-cursor"></span></div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- STATS -->
+
+    <div class="pg-container">
+        <div class="pg-stats">
+            <div class="pg-stat">
+                <strong>01</strong>
+                <span>Think Creatively</span>
+            </div>
+
+            <div class="pg-stat">
+                <strong>02</strong>
+                <span>Learn Continuously</span>
+            </div>
+
+            <div class="pg-stat">
+                <strong>03</strong>
+                <span>Build Real Projects</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+
+    <section class="pg-section" id="about">
+        <div class="pg-container pg-about-grid">
+
+            <div class="pg-about-text">
+                <span class="pg-label">WHO WE ARE</span>
+
+                <h3>البرمجة مش مجرد كتابة كود!</h3>
+
+                <p>
+                    قسم Programming هو المكان اللي بتتعلم فيه تفكر
+                    كمبرمج، تحلل المشاكل، وتوصل لحلول عملية باستخدام
+                    لغات البرمجة والأدوات الحديثة.
+                </p>
+
+                <p>
+                    مش هدفنا نحفظ Syntax وبس؛ هدفنا نفهم إزاي البرامج
+                    بتتعمل من البداية، وإزاي نحول فكرة بسيطة إلى
+                    تطبيق يقدر الناس تستخدمه في حياتها.
+                </p>
+
+                <p>
+                    سواء كنت مبتدئ أو عندك خبرة، هتلاقي مساحة تتعلم،
+                    تجرب، تغلط، تطور نفسك، وتشتغل مع فريق عنده نفس الشغف.
+                </p>
+            </div>
+
+            <div class="pg-about-visual">
+                &lt;/&gt;
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FIELDS -->
+
+    <section class="pg-section">
+        <div class="pg-container">
+
+            <div class="pg-heading">
+                <small>OUR SPECIALTIES</small>
+                <h2>إيه اللي هتتعلمه؟</h2>
+                <p>
+                    هتكتشف مجالات مختلفة في عالم البرمجة،
+                    وتبدأ تحدد المسار اللي يناسب اهتماماتك.
+                </p>
+            </div>
+
+            <div class="pg-cards">
+
+                <div class="pg-card">
+                    <div class="pg-card-icon">&lt;/&gt;</div>
+                    <h3>Web Development</h3>
+                    <p>
+                        تصميم وتطوير مواقع الويب باستخدام HTML وCSS
+                        وJavaScript، وبناء واجهات تفاعلية وتجارب مستخدم مميزة.
+                    </p>
+                </div>
+
+                <div class="pg-card">
+                    <div class="pg-card-icon">{ }</div>
+                    <h3>Programming Fundamentals</h3>
+                    <p>
+                        تعلم أساسيات البرمجة والمنطق البرمجي،
+                        والمتغيرات والشروط والLoops والدوال.
+                    </p>
+                </div>
+
+                <div class="pg-card">
+                    <div class="pg-card-icon">DB</div>
+                    <h3>Database Development</h3>
+                    <p>
+                        تصميم قواعد البيانات، تنظيم المعلومات،
+                        والتعامل مع SQL وعمليات تخزين واسترجاع البيانات.
+                    </p>
+                </div>
+
+                <div class="pg-card">
+                    <div class="pg-card-icon">API</div>
+                    <h3>Backend Development</h3>
+                    <p>
+                        بناء السيرفرات والتعامل مع APIs باستخدام
+                        Node.js وExpress، وربط الواجهة الأمامية بالبيانات.
+                    </p>
+                </div>
+
+                <div class="pg-card">
+                    <div class="pg-card-icon">DS</div>
+                    <h3>Data Structures</h3>
+                    <p>
+                        فهم طرق تنظيم البيانات والخوارزميات،
+                        وتحسين طريقة كتابة البرامج وحل المشكلات.
+                    </p>
+                </div>
+
+                <div class="pg-card">
+                    <div class="pg-card-icon">GH</div>
+                    <h3>Git & Teamwork</h3>
+                    <p>
+                        إدارة الأكواد باستخدام Git وGitHub،
+                        والتعاون مع فريق في تطوير مشروع برمجي حقيقي.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ROADMAP -->
+
+    <section class="pg-section">
+        <div class="pg-container">
+
+            <div class="pg-heading">
+                <small>LEARNING ROADMAP</small>
+                <h2>رحلتك داخل القسم</h2>
+                <p>
+                    هنمشي معاك خطوة بخطوة من أول سطر كود
+                    لحد ما تبني مشروع تقدر تعرضه بفخر.
+                </p>
+            </div>
+
+            <div class="pg-roadmap">
+
+                <div class="pg-roadmap-item">
+                    <div class="pg-step">01</div>
+                    <div class="pg-roadmap-content">
+                        <h3>Programming Basics</h3>
+                        <p>
+                            فهم أساسيات البرمجة، المتغيرات، أنواع البيانات،
+                            الشروط، التكرار، والدوال.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="pg-roadmap-item">
+                    <div class="pg-step">02</div>
+                    <div class="pg-roadmap-content">
+                        <h3>Problem Solving</h3>
+                        <p>
+                            التدريب على التفكير المنطقي،
+                            تحليل المشكلات، وكتابة حلول برمجية منظمة.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="pg-roadmap-item">
+                    <div class="pg-step">03</div>
+                    <div class="pg-roadmap-content">
+                        <h3>Frontend Development</h3>
+                        <p>
+                            بناء صفحات ومواقع تفاعلية باستخدام HTML وCSS
+                            وJavaScript.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="pg-roadmap-item">
+                    <div class="pg-step">04</div>
+                    <div class="pg-roadmap-content">
+                        <h3>Backend & Databases</h3>
+                        <p>
+                            تعلم السيرفرات وواجهات API وقواعد البيانات
+                            وربط أجزاء المشروع مع بعضها.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="pg-roadmap-item">
+                    <div class="pg-step">05</div>
+                    <div class="pg-roadmap-content">
+                        <h3>Real World Projects</h3>
+                        <p>
+                            تنفيذ مشروع متكامل والعمل داخل فريق،
+                            واستخدام GitHub لعرض أعمالك.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNOLOGIES -->
+
+    <section class="pg-section">
+        <div class="pg-container">
+
+            <div class="pg-heading">
+                <small>OUR TOOLKIT</small>
+                <h2>Technologies & Tools</h2>
+                <p>
+                    أدوات وتقنيات ممكن تتعامل معاها خلال رحلتك التعليمية
+                    ومشاريعك داخل القسم.
+                </p>
+            </div>
+
+            <div class="pg-tech-list">
+                <span class="pg-tech">HTML5</span>
+                <span class="pg-tech">CSS3</span>
+                <span class="pg-tech">JavaScript</span>
+                <span class="pg-tech">C++</span>
+                <span class="pg-tech">Python</span>
+                <span class="pg-tech">Node.js</span>
+                <span class="pg-tech">Express.js</span>
+                <span class="pg-tech">SQL</span>
+                <span class="pg-tech">MongoDB</span>
+                <span class="pg-tech">Git</span>
+                <span class="pg-tech">GitHub</span>
+                <span class="pg-tech">VS Code</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+
+    <section class="pg-section">
+        <div class="pg-container">
+
+            <div class="pg-heading">
+                <small>BUILD SOMETHING REAL</small>
+                <h2>أفكار مشاريع ممكن تنفذها</h2>
+                <p>
+                    التعلم الحقيقي بيبدأ لما تستخدم اللي اتعلمته
+                    في بناء حاجة ملموسة.
+                </p>
+            </div>
+
+            <div class="pg-cards">
+
+                <div class="pg-project">
+                    <span class="project-type">WEB DEVELOPMENT</span>
+                    <h3>University Platform</h3>
+                    <p>
+                        منصة جامعية تجمع الأخبار والفعاليات والأقسام
+                        وتتيح للطلاب التواصل والتقديم.
+                    </p>
+                </div>
+
+                <div class="pg-project">
+                    <span class="project-type">BACKEND SYSTEM</span>
+                    <h3>Smart Task Manager</h3>
+                    <p>
+                        نظام لإدارة المهام والمستخدمين
+                        وتخزين البيانات ومتابعة تقدم العمل.
+                    </p>
+                </div>
+
+                <div class="pg-project">
+                    <span class="project-type">DATABASE</span>
+                    <h3>Student Management</h3>
+                    <p>
+                        تطبيق لتنظيم بيانات الطلاب
+                        وإدارة التسجيل والحضور والتقارير.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+
+    <section class="pg-section">
+        <div class="pg-container">
+
+            <div class="pg-heading">
+                <small>GROW WITH US</small>
+                <h2>مهارات هتكتسبها</h2>
+                <p>
+                    مش بس مهارات تقنية، لكن كمان مهارات هتساعدك
+                    في الدراسة والحياة العملية.
+                </p>
+            </div>
+
+            <div class="pg-skills">
+
+                <div class="pg-skill">
+                    <h3>Problem Solving</h3>
+                    <p>تحليل المشكلات والتفكير في حلول منطقية وفعالة.</p>
+                </div>
+
+                <div class="pg-skill">
+                    <h3>Critical Thinking</h3>
+                    <p>تقييم الأفكار واختيار الحلول المناسبة لكل موقف.</p>
+                </div>
+
+                <div class="pg-skill">
+                    <h3>Team Collaboration</h3>
+                    <p>العمل مع فريق ومشاركة الأكواد وتنظيم المهام.</p>
+                </div>
+
+                <div class="pg-skill">
+                    <h3>Technical Communication</h3>
+                    <p>شرح أفكارك ومشاريعك والتواصل بشكل احترافي.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- JOIN -->
+
+    <section class="pg-section">
+        <div class="pg-container">
+
+            <div class="pg-final">
+                <span class="pg-label">YOUR NEXT CHAPTER</span>
+
+                <h2>Ready to Build the Future?</h2>
+
+                <p>
+                    مش لازم تكون محترف علشان تبدأ.
+                    كل اللي محتاجه هو الفضول والاستعداد للتعلم والتجربة.
+                    مكانك مستنيك وسط مجتمع NEXUS.
+                </p>
+
+                <a href="join.html?department=Programming" class="pg-btn primary">
+                    انضم إلى Programming ←
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer class="pg-footer">
+        <p>
+            <span>NEXUS</span> University Club
+            | Programming Department
+        </p>
+
+        <p>Think Different. Code Better. Build Together.</p>
+
+        <a href="departments.html" style="color:#00e5ff;text-decoration:none;">
+            العودة إلى جميع الأقسام
+        </a>
+    </footer>
+
+</main>
+
+<script src="../js/main.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/animations.js"></script>
+
+</body>
+</html>

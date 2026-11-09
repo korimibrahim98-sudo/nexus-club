@@ -1,0 +1,928 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphic Design | NEXUS</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/animations.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ds-orange: #ff8a32;
+            --ds-yellow: #ffd447;
+            --ds-purple: #a77bff;
+            --ds-bg: #100d18;
+            --ds-muted: #c0b8cb;
+        }
+
+        body {
+            background: var(--ds-bg);
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .ds-page {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ds-container {
+            width: min(1150px, 90%);
+            margin: auto;
+        }
+
+        .ds-section {
+            padding: 95px 0;
+            position: relative;
+        }
+
+        .ds-bg-shape {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            filter: blur(130px);
+            opacity: .17;
+            pointer-events: none;
+        }
+
+        .ds-bg-shape.one {
+            background: var(--ds-orange);
+            top: 100px;
+            right: -160px;
+        }
+
+        .ds-bg-shape.two {
+            background: var(--ds-purple);
+            bottom: 100px;
+            left: -160px;
+        }
+
+        .ds-label {
+            display: inline-block;
+            padding: 9px 17px;
+            color: var(--ds-yellow);
+            border: 1px solid rgba(255,212,71,.3);
+            background: rgba(255,212,71,.07);
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        /* HERO */
+
+        .ds-hero {
+            min-height: 720px;
+            padding: 100px 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .ds-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .ds-hero h1 {
+            font-size: clamp(42px, 6vw, 78px);
+            line-height: 1.3;
+            margin: 25px 0;
+            font-weight: 900;
+        }
+
+        .ds-hero h1 span {
+            color: var(--ds-orange);
+            text-shadow: 0 0 30px rgba(255,138,50,.2);
+        }
+
+        .ds-hero p {
+            color: var(--ds-muted);
+            line-height: 2.1;
+            font-size: 16px;
+        }
+
+        .ds-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .ds-btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 14px 27px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: .3s;
+        }
+
+        .ds-btn.primary {
+            color: #211306;
+            background: linear-gradient(100deg, #ff9b42, #ffd447);
+        }
+
+        .ds-btn.secondary {
+            color: white;
+            border: 1px solid #51405e;
+            background: rgba(255,255,255,.03);
+        }
+
+        .ds-btn:hover {
+            transform: translateY(-5px) rotate(-1deg);
+            box-shadow: 0 12px 30px rgba(255,138,50,.2);
+        }
+
+        /* ARTWORK */
+
+        .ds-artwork {
+            height: 440px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ds-art-circle {
+            width: 290px;
+            height: 290px;
+            border-radius: 50%;
+            background: linear-gradient(140deg, #ff8a32, #ffcf55);
+            position: absolute;
+            animation: ds-float 5s ease-in-out infinite;
+            box-shadow: 0 20px 70px rgba(255,138,50,.18);
+        }
+
+        .ds-art-square {
+            width: 185px;
+            height: 185px;
+            background: linear-gradient(140deg, #9b70ff, #d3a5ff);
+            position: absolute;
+            border-radius: 25px;
+            transform: rotate(35deg);
+            right: 5%;
+            top: 7%;
+            opacity: .9;
+            animation: ds-rotate 18s linear infinite;
+        }
+
+        .ds-art-triangle {
+            position: absolute;
+            left: 8%;
+            bottom: 8%;
+            width: 0;
+            height: 0;
+            border-left: 85px solid transparent;
+            border-right: 85px solid transparent;
+            border-bottom: 150px solid #ff5b86;
+            filter: drop-shadow(0 10px 30px rgba(255,91,134,.25));
+            transform: rotate(-15deg);
+            animation: ds-float 6s ease-in-out infinite;
+        }
+
+        .ds-art-center {
+            position: relative;
+            z-index: 3;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 70px;
+            font-weight: 900;
+            color: #17101e;
+            text-shadow: 2px 3px rgba(255,255,255,.25);
+        }
+
+        .ds-art-text {
+            position: absolute;
+            top: 5%;
+            left: 10%;
+            color: var(--ds-yellow);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            letter-spacing: 3px;
+            transform: rotate(-12deg);
+        }
+
+        .ds-art-plus {
+            position: absolute;
+            bottom: 9%;
+            right: 9%;
+            color: white;
+            font-size: 65px;
+            font-weight: 900;
+        }
+
+        @keyframes ds-float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-18px); }
+        }
+
+        @keyframes ds-rotate {
+            to { transform: rotate(395deg); }
+        }
+
+        /* HEADINGS */
+
+        .ds-heading {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .ds-heading small {
+            color: var(--ds-orange);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 3px;
+            font-size: 11px;
+        }
+
+        .ds-heading h2 {
+            font-size: clamp(28px, 4vw, 43px);
+            margin: 15px 0;
+            font-weight: 900;
+        }
+
+        .ds-heading p {
+            max-width: 650px;
+            margin: auto;
+            color: var(--ds-muted);
+            line-height: 1.9;
+        }
+
+        /* INTRO */
+
+        .ds-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .ds-intro h3 {
+            font-size: 29px;
+            margin: 18px 0;
+        }
+
+        .ds-intro p {
+            color: var(--ds-muted);
+            line-height: 2.1;
+            margin-bottom: 14px;
+        }
+
+        .ds-quote {
+            background: linear-gradient(135deg, rgba(255,138,50,.13), rgba(167,123,255,.12));
+            border: 1px solid rgba(255,138,50,.25);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .ds-quote strong {
+            display: block;
+            font-size: 50px;
+            color: var(--ds-yellow);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .ds-quote h3 {
+            font-size: 23px;
+            margin: 15px 0;
+        }
+
+        .ds-quote p {
+            color: var(--ds-muted);
+            line-height: 1.9;
+        }
+
+        /* CARDS */
+
+        .ds-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .ds-card {
+            background: linear-gradient(145deg, #241a2d, #171221);
+            border: 1px solid #3e304a;
+            border-radius: 20px;
+            padding: 28px;
+            transition: .35s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ds-card:hover {
+            transform: translateY(-9px);
+            border-color: var(--ds-orange);
+            box-shadow: 0 15px 35px rgba(255,138,50,.09);
+        }
+
+        .ds-icon {
+            width: 58px;
+            height: 58px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            background: rgba(255,138,50,.12);
+            border: 1px solid rgba(255,138,50,.25);
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        .ds-card h3 {
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+
+        .ds-card p {
+            color: var(--ds-muted);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        /* DESIGN PROCESS */
+
+        .ds-process {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 17px;
+        }
+
+        .ds-process-item {
+            background: #20182b;
+            border: 1px solid #40304d;
+            border-radius: 17px;
+            padding: 25px 18px;
+            text-align: center;
+            transition: .3s;
+        }
+
+        .ds-process-item:hover {
+            transform: translateY(-7px);
+            border-color: var(--ds-yellow);
+        }
+
+        .ds-process-item strong {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--ds-yellow);
+            font-size: 27px;
+        }
+
+        .ds-process-item h3 {
+            margin: 15px 0 8px;
+            font-size: 17px;
+        }
+
+        .ds-process-item p {
+            color: var(--ds-muted);
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* TOOLS */
+
+        .ds-tools {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .ds-tool {
+            padding: 15px 25px;
+            border-radius: 13px;
+            border: 1px solid #4b394e;
+            background: #20182b;
+            font-family: monospace;
+            transition: .3s;
+        }
+
+        .ds-tool:hover {
+            color: var(--ds-yellow);
+            border-color: var(--ds-yellow);
+            transform: translateY(-4px);
+        }
+
+        /* PROJECTS */
+
+        .ds-project {
+            background: linear-gradient(135deg, #281e32, #191322);
+            border: 1px solid #49364d;
+            border-radius: 20px;
+            padding: 27px;
+        }
+
+        .ds-project-label {
+            color: var(--ds-yellow);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        .ds-project h3 {
+            margin: 14px 0;
+        }
+
+        .ds-project p {
+            color: var(--ds-muted);
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+        /* SKILLS */
+
+        .ds-skills {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .ds-skill {
+            padding: 24px;
+            background: #20182b;
+            border: 1px solid #40304d;
+            border-radius: 16px;
+        }
+
+        .ds-skill h3 {
+            color: var(--ds-orange);
+            margin-bottom: 10px;
+        }
+
+        .ds-skill p {
+            color: var(--ds-muted);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        /* CTA */
+
+        .ds-final {
+            text-align: center;
+            padding: 65px 25px;
+            background: linear-gradient(130deg, rgba(255,138,50,.12), rgba(167,123,255,.12));
+            border: 1px solid rgba(255,138,50,.25);
+            border-radius: 25px;
+        }
+
+        .ds-final h2 {
+            font-size: clamp(27px, 4vw, 42px);
+            margin: 20px 0;
+        }
+
+        .ds-final p {
+            color: var(--ds-muted);
+            line-height: 2;
+            margin-bottom: 25px;
+        }
+
+        .ds-footer {
+            padding: 35px 15px;
+            text-align: center;
+            color: #a59aaf;
+            border-top: 1px solid #34283c;
+            font-size: 13px;
+        }
+
+        .ds-footer span {
+            color: var(--ds-orange);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        @media(max-width: 850px) {
+            .ds-hero-grid,
+            .ds-intro {
+                grid-template-columns: 1fr;
+            }
+
+            .ds-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .ds-process {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .ds-hero {
+                min-height: auto;
+            }
+        }
+
+        @media(max-width: 550px) {
+            .ds-section {
+                padding: 65px 0;
+            }
+
+            .ds-cards,
+            .ds-skills {
+                grid-template-columns: 1fr;
+            }
+
+            .ds-process {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .ds-artwork {
+                transform: scale(.8);
+                margin: -30px 0;
+            }
+
+            .ds-hero h1 {
+                font-size: 42px;
+            }
+
+            .ds-buttons {
+                flex-direction: column;
+            }
+
+            .ds-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="ds-page">
+
+    <div class="ds-bg-shape one"></div>
+    <div class="ds-bg-shape two"></div>
+
+    <!-- HERO -->
+
+    <section class="ds-hero">
+        <div class="ds-container ds-hero-grid">
+
+            <div>
+                <span class="ds-label">NEXUS / DEPARTMENT 004</span>
+
+                <h1>
+                    THINK.<br>
+                    CREATE.<br>
+                    <span>INSPIRE.</span>
+                </h1>
+
+                <p>
+                    مرحبًا بك في عالم Graphic Design.
+                    المكان اللي بتتحول فيه الأفكار إلى صور،
+                    والألوان إلى رسائل، والتفاصيل البسيطة
+                    إلى هويات بصرية تفضل في الذاكرة.
+                    هنا بنتعلم إزاي نصمم ونوصل أفكارنا بطريقة إبداعية.
+                </p>
+
+                <div class="ds-buttons">
+                    <a href="join.html?department=Design" class="ds-btn primary">
+                        انضم إلى القسم ←
+                    </a>
+
+                    <a href="#about" class="ds-btn secondary">
+                        اكتشف عالم التصميم
+                    </a>
+                </div>
+            </div>
+
+            <div class="ds-artwork">
+                <div class="ds-art-square"></div>
+                <div class="ds-art-circle"></div>
+                <div class="ds-art-triangle"></div>
+                <div class="ds-art-text">CREATIVE STUDIO</div>
+                <div class="ds-art-center">DESIGN</div>
+                <div class="ds-art-plus">+</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INTRO -->
+
+    <section class="ds-section" id="about">
+        <div class="ds-container ds-intro">
+
+            <div>
+                <span class="ds-label">WHO WE ARE</span>
+
+                <h3>التصميم مش مجرد شكل جميل!</h3>
+
+                <p>
+                    Graphic Design هو فن توصيل الأفكار والمعلومات
+                    بصريًا باستخدام الألوان والخطوط والصور
+                    والتكوينات المختلفة.
+                </p>
+
+                <p>
+                    في NEXUS هتتعلم إزاي تفكر كمصمم،
+                    وتفهم الجمهور المستهدف، وتختار العناصر
+                    المناسبة علشان تبني تصميم له هدف ورسالة.
+                </p>
+
+                <p>
+                    سواء بتحب الرسم أو الألوان أو صناعة المحتوى
+                    البصري، هنا هتلاقي مساحة تطور فيها موهبتك
+                    وتحولها لمهارة عملية.
+                </p>
+            </div>
+
+            <div class="ds-quote">
+                <strong>IDEA.</strong>
+                <h3>Make Ideas Visible</h3>
+                <p>
+                    التصميم الناجح مش بس بيجذب الانتباه،
+                    لكنه بيوصل الرسالة بشكل واضح ومؤثر.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SPECIALTIES -->
+
+    <section class="ds-section">
+        <div class="ds-container">
+
+            <div class="ds-heading">
+                <small>EXPLORE YOUR CREATIVITY</small>
+                <h2>مجالات التصميم</h2>
+                <p>
+                    هتتعرف على تخصصات مختلفة تفتحلك
+                    أبواب واسعة للإبداع والعمل.
+                </p>
+            </div>
+
+            <div class="ds-cards">
+
+                <div class="ds-card">
+                    <div class="ds-icon">🎨</div>
+                    <h3>Visual Identity</h3>
+                    <p>
+                        بناء هوية بصرية متكاملة للعلامات التجارية
+                        من خلال الألوان والشعار والخطوط والعناصر.
+                    </p>
+                </div>
+
+                <div class="ds-card">
+                    <div class="ds-icon">🖼️</div>
+                    <h3>Social Media Design</h3>
+                    <p>
+                        تصميم منشورات وإعلانات وأغلفة
+                        للسوشيال ميديا بشكل جذاب ومتناسق.
+                    </p>
+                </div>
+
+                <div class="ds-card">
+                    <div class="ds-icon">✏️</div>
+                    <h3>Logo Design</h3>
+                    <p>
+                        تصميم الشعارات التي تعبر عن شخصية
+                        المشروع أو المؤسسة بطريقة مميزة.
+                    </p>
+                </div>
+
+                <div class="ds-card">
+                    <div class="ds-icon">📐</div>
+                    <h3>Layout & Typography</h3>
+                    <p>
+                        تنظيم العناصر واختيار الخطوط
+                        وبناء تصميم واضح ومتوازن بصريًا.
+                    </p>
+                </div>
+
+                <div class="ds-card">
+                    <div class="ds-icon">📱</div>
+                    <h3>UI Design</h3>
+                    <p>
+                        تصميم واجهات التطبيقات والمواقع
+                        وتجهيز العناصر البصرية للتجربة الرقمية.
+                    </p>
+                </div>
+
+                <div class="ds-card">
+                    <div class="ds-icon">✨</div>
+                    <h3>Motion Graphics</h3>
+                    <p>
+                        تحويل العناصر والتصميمات الثابتة
+                        إلى محتوى بصري متحرك.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+
+    <section class="ds-section">
+        <div class="ds-container">
+
+            <div class="ds-heading">
+                <small>FROM IDEA TO DESIGN</small>
+                <h2>إزاي بنصمم؟</h2>
+                <p>
+                    كل تصميم ناجح بيعدي بمراحل منظمة
+                    علشان نوصل لأفضل نتيجة.
+                </p>
+            </div>
+
+            <div class="ds-process">
+
+                <div class="ds-process-item">
+                    <strong>01</strong>
+                    <h3>Research</h3>
+                    <p>فهم الفكرة والجمهور والهدف من التصميم.</p>
+                </div>
+
+                <div class="ds-process-item">
+                    <strong>02</strong>
+                    <h3>Concept</h3>
+                    <p>توليد الأفكار واختيار الاتجاه البصري المناسب.</p>
+                </div>
+
+                <div class="ds-process-item">
+                    <strong>03</strong>
+                    <h3>Design</h3>
+                    <p>تنفيذ التصميم وتجربة الألوان والتكوينات.</p>
+                </div>
+
+                <div class="ds-process-item">
+                    <strong>04</strong>
+                    <h3>Review</h3>
+                    <p>مراجعة العمل وتحسين التفاصيل وتسليم النتيجة.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TOOLS -->
+
+    <section class="ds-section">
+        <div class="ds-container">
+
+            <div class="ds-heading">
+                <small>OUR CREATIVE TOOLKIT</small>
+                <h2>Design Tools</h2>
+                <p>
+                    أدوات تساعدك تحول أفكارك
+                    إلى تصميمات احترافية.
+                </p>
+            </div>
+
+            <div class="ds-tools">
+                <span class="ds-tool">Adobe Photoshop</span>
+                <span class="ds-tool">Adobe Illustrator</span>
+                <span class="ds-tool">Adobe InDesign</span>
+                <span class="ds-tool">Adobe After Effects</span>
+                <span class="ds-tool">Figma</span>
+                <span class="ds-tool">Canva</span>
+                <span class="ds-tool">Adobe Premiere Pro</span>
+                <span class="ds-tool">Blender</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+
+    <section class="ds-section">
+        <div class="ds-container">
+
+            <div class="ds-heading">
+                <small>TURN CREATIVITY INTO REALITY</small>
+                <h2>مشاريع ممكن تنفذها</h2>
+                <p>
+                    فرص عملية تقدر من خلالها تطبق مهاراتك
+                    وتبني Portfolio يعرض شغلك.
+                </p>
+            </div>
+
+            <div class="ds-cards">
+
+                <div class="ds-project">
+                    <span class="ds-project-label">BRANDING</span>
+                    <h3>NEXUS Brand Identity</h3>
+                    <p>
+                        بناء هوية بصرية متكاملة للنادي
+                        تشمل الشعار والألوان والخطوط والتطبيقات.
+                    </p>
+                </div>
+
+                <div class="ds-project">
+                    <span class="ds-project-label">SOCIAL MEDIA</span>
+                    <h3>Campaign Design</h3>
+                    <p>
+                        تصميم حملة إعلانية متكاملة
+                        لفعالية جامعية على منصات التواصل.
+                    </p>
+                </div>
+
+                <div class="ds-project">
+                    <span class="ds-project-label">UI DESIGN</span>
+                    <h3>Mobile App Interface</h3>
+                    <p>
+                        تصميم واجهة تطبيق طلابي
+                        يسهّل الوصول إلى الخدمات والفعاليات.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+
+    <section class="ds-section">
+        <div class="ds-container">
+
+            <div class="ds-heading">
+                <small>GROW AS A DESIGNER</small>
+                <h2>مهارات هتكتسبها</h2>
+                <p>
+                    مش بس هتتعلم استخدام برامج،
+                    لكن هتطور طريقة تفكيرك الإبداعية.
+                </p>
+            </div>
+
+            <div class="ds-skills">
+
+                <div class="ds-skill">
+                    <h3>Creative Thinking</h3>
+                    <p>توليد أفكار جديدة وتحويلها إلى حلول بصرية.</p>
+                </div>
+
+                <div class="ds-skill">
+                    <h3>Color Theory</h3>
+                    <p>فهم تأثير الألوان والتناسق والاختيار الصحيح.</p>
+                </div>
+
+                <div class="ds-skill">
+                    <h3>Visual Communication</h3>
+                    <p>توصيل الرسائل والأفكار من خلال العناصر البصرية.</p>
+                </div>
+
+                <div class="ds-skill">
+                    <h3>Portfolio Building</h3>
+                    <p>تنظيم أعمالك وعرضها بشكل احترافي.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- JOIN -->
+
+    <section class="ds-section">
+        <div class="ds-container">
+
+            <div class="ds-final">
+                <span class="ds-label">YOUR CREATIVE JOURNEY</span>
+
+                <h2>Make Something Unforgettable.</h2>
+
+                <p>
+                    عندك فكرة؟ عندك خيال؟ بتحب الألوان؟
+                    خلي إبداعك يظهر وانضم لمجتمع المصممين
+                    في NEXUS.
+                </p>
+
+                <a href="join.html?department=Design" class="ds-btn primary">
+                    انضم إلى Design Department ←
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer class="ds-footer">
+        <p>
+            <span>NEXUS</span> University Club |
+            Graphic Design Department
+        </p>
+
+        <p>Imagine. Design. Inspire.</p>
+
+        <a href="departments.html" style="color:#ffb44c;text-decoration:none;">
+            العودة إلى جميع الأقسام
+        </a>
+    </footer>
+
+</main>
+
+<script src="../js/main.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/animations.js"></script>
+
+</body>
+</html>

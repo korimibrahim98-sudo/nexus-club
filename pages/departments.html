@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS | Departments</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/animations.css">
+
+    <style>
+        .departments-hero {
+            min-height: 55vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px 60px;
+            background:
+                radial-gradient(circle at 20% 30%, #00e5ff22, transparent 35%),
+                radial-gradient(circle at 80% 70%, #8b5cf633, transparent 35%);
+        }
+
+        .departments-hero h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            margin-bottom: 20px;
+        }
+
+        .departments-hero h1 span {
+            background: linear-gradient(90deg, #00e5ff, #a78bfa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .departments-hero p {
+            max-width: 750px;
+            line-height: 2;
+            opacity: .8;
+        }
+
+        .departments-grid {
+            width: min(1200px, 92%);
+            margin: 50px auto 100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        a.department-card {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            min-height: 310px;
+            padding: 30px;
+            border: 1px solid #ffffff20;
+            border-radius: 22px;
+            background: linear-gradient(145deg, #151d32, #0b1020);
+            transition: .4s ease;
+        }
+
+        a.department-card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            filter: blur(65px);
+            opacity: .25;
+            top: -60px;
+            left: -60px;
+            transition: .4s;
+            pointer-events: none;
+        }
+
+        a.department-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--dept-color);
+            box-shadow: 0 15px 45px #0008;
+        }
+
+        a.department-card:hover::before {
+            opacity: .65;
+            transform: scale(1.5);
+        }
+
+        .department-icon {
+            width: 75px;
+            height: 75px;
+            display: grid;
+            place-items: center;
+            border-radius: 20px;
+            font-size: 2.3rem;
+            margin-bottom: 25px;
+            background: color-mix(in srgb, var(--dept-color) 18%, transparent);
+            border: 1px solid color-mix(in srgb, var(--dept-color) 45%, transparent);
+        }
+
+        .department-card h2 {
+            font-size: 1.45rem;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .department-card p {
+            line-height: 1.9;
+            color: #aab4ca;
+            font-size: .95rem;
+        }
+
+        .department-card .card-link {
+            display: inline-block;
+            margin-top: 25px;
+            color: var(--dept-color);
+            font-weight: bold;
+        }
+
+        .dept-programming { --dept-color: #00e5a8; }
+        .dept-robotics { --dept-color: #ff7043; }
+        .dept-ai { --dept-color: #a78bfa; }
+        .dept-design { --dept-color: #ff5ca8; }
+        .dept-media { --dept-color: #ffb347; }
+        .dept-hr { --dept-color: #45d6a4; }
+        .dept-pr { --dept-color: #42a5f5; }
+        .dept-organization { --dept-color: #ffd166; }
+
+        .dept-programming::before { background: #00e5a8; }
+        .dept-robotics::before { background: #ff7043; }
+        .dept-ai::before { background: #a78bfa; }
+        .dept-design::before { background: #ff5ca8; }
+        .dept-media::before { background: #ffb347; }
+        .dept-hr::before { background: #45d6a4; }
+        .dept-pr::before { background: #42a5f5; }
+        .dept-organization::before { background: #ffd166; }
+
+        .departments-cta {
+            text-align: center;
+            padding: 70px 20px;
+            margin: 0 auto 70px;
+            width: min(1000px, 92%);
+            border: 1px solid #00e5ff35;
+            border-radius: 25px;
+            background: linear-gradient(120deg, #00e5ff12, #8b5cf618);
+        }
+
+        .departments-cta h2 {
+            margin-bottom: 15px;
+        }
+
+        .departments-cta p {
+            color: #aab4ca;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">NEXUS<span>.</span></a>
+
+            <nav class="nav-links">
+                <a href="../index.html">الرئيسية</a>
+                <a href="about.html">عن النادي</a>
+                <a href="departments.html" class="active">الأقسام</a>
+                <a href="events.html">الفعاليات</a>
+                <a href="projects.html">المشاريع</a>
+                <a href="members.html">الأعضاء</a>
+                <a href="contact.html">تواصل معنا</a>
+            </nav>
+
+            <a href="join.html" class="nav-cta">انضم إلينا</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="departments-hero">
+        <span class="section-tag">EXPLORE YOUR POTENTIAL</span>
+
+        <h1>
+            اكتشف عالم <span>NEXUS</span>
+        </h1>
+
+        <p>
+            كل فكرة عظيمة تبدأ بشغف، وكل شغف يحتاج إلى المكان الصحيح لينمو.
+            اكتشف أقسام النادي، واختر المجال الذي يشبه طموحك،
+            وابدأ رحلتك في عالم التكنولوجيا والإبداع.
+        </p>
+    </section>
+
+    <!-- Departments -->
+    <section class="departments-grid">
+
+        <a href="programming.html"
+           class="department-card dept-programming reveal">
+            <div class="department-icon">💻</div>
+            <h2>Programming</h2>
+            <p>
+                تعلم بناء المواقع والتطبيقات والبرمجيات،
+                وحوّل أفكارك إلى منتجات رقمية حقيقية.
+            </p>
+            <span class="card-link">اكتشف القسم ←</span>
+        </a>
+
+        <a href="robotics.html"
+           class="department-card dept-robotics reveal">
+            <div class="department-icon">🤖</div>
+            <h2>Robotics</h2>
+            <p>
+                ادخل عالم الروبوتات والأنظمة المدمجة،
+                واجمع بين الإلكترونيات والبرمجة والميكانيكا.
+            </p>
+            <span class="card-link">اكتشف القسم ←</span>
+        </a>
+
+        <a href="ai.html"
+           class="department-card dept-ai reveal">
+            <div class="department-icon">🧠</div>
+            <h2>Artificial Intelligence</h2>
+            <p>
+                اكتشف تعلم الآلة والذكاء الاصطناعي،
+                واصنع أنظمة قادرة على تحليل البيانات والتعلم.
+            </p>
+            <span class="card-link">اكتشف القسم ←</span>
+        </a>
+
+        <a href="design.html"
+           class="department-card dept-design reveal">
+            <div class="department-icon">🎨</div>
+            <h2>Graphic Design</h2>
+            <p>
+                حوّل الأفكار إلى تصاميم بصرية مميزة،
+                وتعلم الهوية البصرية والتصميم الإبداعي.
+            </p>
+            <span class="card-link">اكتشف القسم ←</span>
+        </a>
+
+        <a href="media.html"
+           class="department-card dept-media reveal">
+            <div class="department-icon">📸</div>
+            <h2>Media</h2>
+            <p>
+                اصنع محتوى يجذب الانتباه،
+                وتعلم التصوير والمونتاج وصناعة القصص.
+            </p>
+            <span class="card-link">اكتشف القسم ←</span>
+        </a>
+
+        <a href="hr.html"
+           class="department-card dept-hr reveal">
+            <div class="department-icon">👥</div>
+            <h2>Human Resources</h2>
+            <p>
+                اكتشف مهارات إدارة الفرق واستقطاب المواهب،
+                وساعد في بناء بيئة عمل متعاونة وناجحة.
+            </p>
+            <span class="card-link">اكتشف القسم ←</span>
+        </a>
+
+        <a href="pr.html"
+           class="department-card dept-pr reveal">
+            <div class="department-icon">🌐</div>
+            <h2>Public Relations</h2>
+            <p>
+                ابنِ علاقات قوية مع المجتمع والشركاء،
+                وكن حلقة الوصل بين النادي والعالم الخارجي.
+            </p>
+            <span class="card-link">اكتشف القسم ←</span>
+        </a>
+
+        <a href="organization.html"
+           class="department-card dept-organization reveal">
+            <div class="department-icon">🎯</div>
+            <h2>Events & Organization</h2>
+            <p>
+                خطط للفعاليات والمؤتمرات،
+                وحوّل الأفكار إلى تجارب منظمة وناجحة.
+            </p>
+            <span class="card-link">اكتشف القسم ←</span>
+        </a>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="departments-cta reveal">
+        <h2>مش عارف تختار أنهي قسم؟</h2>
+        <p>
+            ابدأ باكتشاف المجالات المختلفة، واختار المكان
+            اللي تقدر فيه تتعلم وتشارك وتبدع.
+        </p>
+        <a href="join.html" class="btn btn-primary">ابدأ رحلتك مع NEXUS</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 NEXUS University Club. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/animations.js"></script>
+
+</body>
+</html>

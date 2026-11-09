@@ -1,0 +1,776 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Department | NEXUS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/animations.css">
+
+    <style>
+        :root {
+            --media: #ff4d32;
+            --media-light: #ff8754;
+            --media-dark: #a91f20;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 80% 15%, rgba(255, 65, 40, .11), transparent 28%),
+                radial-gradient(circle at 10% 60%, rgba(255, 135, 50, .08), transparent 30%),
+                #08090e;
+        }
+
+        .media-hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 130px 8% 90px;
+            background:
+                linear-gradient(110deg, rgba(8,9,14,.97), rgba(8,9,14,.72)),
+                radial-gradient(circle at 75% 45%, #68201b, transparent 50%);
+        }
+
+        .media-hero::before {
+            content: "";
+            position: absolute;
+            width: 480px;
+            height: 480px;
+            border: 1px solid rgba(255,77,50,.2);
+            border-radius: 50%;
+            left: -150px;
+            top: 10%;
+            box-shadow: 0 0 70px rgba(255,77,50,.1);
+        }
+
+        .media-hero-content {
+            max-width: 760px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .media-label {
+            display: inline-block;
+            color: var(--media-light);
+            border: 1px solid rgba(255,77,50,.4);
+            background: rgba(255,77,50,.08);
+            padding: 9px 18px;
+            border-radius: 30px;
+            margin-bottom: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .media-hero h1 {
+            font-size: clamp(42px, 7vw, 85px);
+            line-height: 1.25;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .media-hero h1 span {
+            display: block;
+            color: var(--media);
+            text-shadow: 0 0 35px rgba(255,77,50,.25);
+        }
+
+        .media-hero p {
+            color: #b5b5c0;
+            font-size: 18px;
+            line-height: 2;
+            max-width: 650px;
+            margin-bottom: 35px;
+        }
+
+        .media-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .media-btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: .3s;
+        }
+
+        .media-btn.primary {
+            background: linear-gradient(135deg, #ff4d32, #d72b25);
+            color: white;
+            box-shadow: 0 8px 30px rgba(255,77,50,.2);
+        }
+
+        .media-btn.secondary {
+            border: 1px solid #444;
+            color: white;
+        }
+
+        .media-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(255,77,50,.2);
+        }
+
+        .media-visual {
+            position: absolute;
+            left: 8%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 290px;
+            height: 290px;
+            border: 1px solid rgba(255,77,50,.35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--media);
+            font-size: 100px;
+            box-shadow: 0 0 80px rgba(255,77,50,.1), inset 0 0 60px rgba(255,77,50,.08);
+            animation: mediaPulse 4s infinite ease-in-out;
+        }
+
+        .media-visual::before,
+        .media-visual::after {
+            content: "";
+            position: absolute;
+            inset: 20px;
+            border: 1px dashed rgba(255,135,84,.35);
+            border-radius: 50%;
+            animation: mediaRotate 18s linear infinite;
+        }
+
+        .media-visual::after {
+            inset: -20px;
+            border-style: solid;
+            border-color: rgba(255,77,50,.15);
+            animation-direction: reverse;
+            animation-duration: 25s;
+        }
+
+        @keyframes mediaPulse {
+            0%, 100% { box-shadow: 0 0 50px rgba(255,77,50,.08); }
+            50% { box-shadow: 0 0 100px rgba(255,77,50,.22); }
+        }
+
+        @keyframes mediaRotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .media-section {
+            padding: 95px 8%;
+        }
+
+        .media-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .media-heading span {
+            color: var(--media);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+        }
+
+        .media-heading h2 {
+            font-size: clamp(28px, 4vw, 43px);
+            margin: 12px 0;
+        }
+
+        .media-heading p {
+            color: #9999a7;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.9;
+        }
+
+        .media-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .media-intro-text h2 {
+            font-size: 34px;
+            margin-bottom: 20px;
+        }
+
+        .media-intro-text h2 span {
+            color: var(--media);
+        }
+
+        .media-intro-text p {
+            color: #aaaab5;
+            line-height: 2.1;
+            margin-bottom: 15px;
+        }
+
+        .media-quote {
+            padding: 40px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(255,77,50,.13), rgba(255,135,50,.03));
+            border: 1px solid rgba(255,77,50,.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .media-quote strong {
+            display: block;
+            color: var(--media-light);
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .media-quote p {
+            color: #d0d0d8;
+            font-size: 19px;
+            line-height: 2;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .media-card {
+            padding: 30px;
+            min-height: 245px;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #17171f, #101017);
+            border: 1px solid #292832;
+            transition: .35s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .media-card::after {
+            content: "";
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: rgba(255,77,50,.08);
+            border-radius: 50%;
+            bottom: -75px;
+            left: -50px;
+            transition: .4s;
+        }
+
+        .media-card:hover {
+            transform: translateY(-9px);
+            border-color: rgba(255,77,50,.6);
+            box-shadow: 0 15px 35px rgba(0,0,0,.25);
+        }
+
+        .media-card:hover::after {
+            transform: scale(1.7);
+        }
+
+        .media-icon {
+            font-size: 35px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .media-card h3 {
+            margin-bottom: 13px;
+            color: #fff;
+            font-size: 21px;
+        }
+
+        .media-card p {
+            color: #a4a4af;
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+        .media-workflow {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .workflow-step {
+            text-align: center;
+            padding: 25px 15px;
+            background: #14141c;
+            border: 1px solid #292832;
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .workflow-number {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: rgba(255,77,50,.13);
+            border: 1px solid var(--media);
+            color: var(--media-light);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .workflow-step h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .workflow-step p {
+            color: #9999a7;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .media-tools {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .tool {
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 1px solid #33313a;
+            background: #15151d;
+            color: #e4e4ea;
+            transition: .3s;
+        }
+
+        .tool:hover {
+            border-color: var(--media);
+            color: var(--media-light);
+            transform: translateY(-4px);
+        }
+
+        .media-projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .media-project {
+            padding: 30px;
+            background: linear-gradient(120deg, #19151a, #111119);
+            border-right: 4px solid var(--media);
+            border-radius: 12px;
+        }
+
+        .media-project h3 {
+            margin-bottom: 12px;
+            font-size: 21px;
+        }
+
+        .media-project p {
+            color: #aaaab5;
+            line-height: 1.9;
+        }
+
+        .media-skills {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .skill-item {
+            padding: 18px;
+            border-radius: 10px;
+            background: rgba(255,255,255,.035);
+            border: 1px solid #292832;
+            color: #d4d4dc;
+        }
+
+        .skill-item::before {
+            content: "✦";
+            color: var(--media);
+            margin-left: 10px;
+        }
+
+        .media-cta {
+            margin: 40px 8% 90px;
+            padding: 65px 30px;
+            text-align: center;
+            border-radius: 25px;
+            background:
+                radial-gradient(circle at center, rgba(255,77,50,.2), transparent 65%),
+                #15121a;
+            border: 1px solid rgba(255,77,50,.3);
+        }
+
+        .media-cta h2 {
+            font-size: clamp(27px, 4vw, 40px);
+            margin-bottom: 15px;
+        }
+
+        .media-cta p {
+            color: #aaaab5;
+            margin-bottom: 28px;
+            line-height: 1.9;
+        }
+
+        @media (max-width: 1000px) {
+            .media-visual {
+                opacity: .15;
+                left: -70px;
+            }
+
+            .media-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .media-workflow {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .media-hero {
+                min-height: 75vh;
+                padding: 110px 6% 70px;
+            }
+
+            .media-visual {
+                display: none;
+            }
+
+            .media-section {
+                padding: 65px 6%;
+            }
+
+            .media-intro,
+            .media-grid,
+            .media-projects,
+            .media-skills {
+                grid-template-columns: 1fr;
+            }
+
+            .media-workflow {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .media-cta {
+                margin: 20px 5% 60px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .media-workflow {
+                grid-template-columns: 1fr;
+            }
+
+            .media-actions {
+                flex-direction: column;
+            }
+
+            .media-btn {
+                text-align: center;
+            }
+        }
+        
+/* MEDIA PAGE - NAVBAR FIX */
+@media (min-width: 901px) {
+    .navbar {
+        display: grid !important;
+        grid-template-columns: minmax(130px, 1fr) auto minmax(130px, 1fr);
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        direction: ltr;
+        padding-inline: 5%;
+        gap: 15px;
+    }
+
+    .navbar .logo {
+        justify-self: start;
+        white-space: nowrap;
+    }
+
+    .navbar .nav-links {
+        justify-self: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        direction: rtl;
+        gap: clamp(10px, 1.4vw, 22px);
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    .navbar .nav-join {
+        justify-self: end;
+        white-space: nowrap;
+        margin: 0;
+        position: static;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1150px) {
+    .navbar .nav-links {
+        gap: 9px;
+        font-size: 13px;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">NEXUS<span>.</span></div>
+        <nav class="nav-links">
+            <a href="../index.html">الرئيسية</a>
+            <a href="about.html">عن النادي</a>
+            <a href="departments.html" class="active">الأقسام</a>
+            <a href="events.html">الفعاليات</a>
+            <a href="projects.html">المشاريع</a>
+            <a href="contact.html">تواصل معنا</a>
+        </nav>
+        <a href="join.html" class="nav-join">انضم إلينا</a>
+    </header>
+
+    <main>
+
+        <section class="media-hero">
+            <div class="media-hero-content reveal">
+                <span class="media-label">NEXUS / MEDIA DEPARTMENT</span>
+                <h1>
+                    كل لحظة لها قصة...
+                    <span>وأنت صانعها.</span>
+                </h1>
+                <p>
+                    في قسم الميديا، نحول الأفكار إلى محتوى بصري مؤثر.
+                    من التصوير وصناعة الفيديو إلى المونتاج والتصميم،
+                    نصنع هوية NEXUS ونوثق كل إنجاز بطريقة مختلفة.
+                </p>
+                <div class="media-actions">
+                    <a href="join.html?department=Media" class="media-btn primary">انضم لفريق الميديا</a>
+                    <a href="#specialties" class="media-btn secondary">اكتشف تخصصاتنا</a>
+                </div>
+            </div>
+
+            <div class="media-visual" aria-hidden="true">▶</div>
+        </section>
+
+        <section class="media-section">
+            <div class="media-intro">
+                <div class="media-intro-text reveal">
+                    <span class="media-label">WHO WE ARE</span>
+                    <h2>نحن لا نصنع محتوى فقط... نحن نصنع <span>تجربة.</span></h2>
+                    <p>
+                        قسم الميديا هو المسؤول عن تحويل أنشطة النادي وأفكاره
+                        ومشاريعه إلى محتوى يصل إلى الناس ويترك انطباعًا.
+                    </p>
+                    <p>
+                        نعمل على بناء هوية بصرية متكاملة، وتوثيق الفعاليات،
+                        وإنتاج الفيديوهات، وإدارة المحتوى الرقمي باحترافية.
+                    </p>
+                </div>
+
+                <div class="media-quote reveal">
+                    <strong>Our Vision</strong>
+                    <p>
+                        "A great story deserves to be seen, heard, and remembered."
+                    </p>
+                    <p>
+                        رؤيتنا أن نجعل كل إنجاز داخل NEXUS قصة تستحق أن تُروى.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="media-section" id="specialties">
+            <div class="media-heading reveal">
+                <span>OUR SPECIALTIES</span>
+                <h2>ماذا ستتعلم معنا؟</h2>
+                <p>مجالات متنوعة تمنحك فرصة لاكتشاف موهبتك وبناء مهاراتك الإبداعية.</p>
+            </div>
+
+            <div class="media-grid">
+
+                <article class="media-card reveal">
+                    <span class="media-icon">📸</span>
+                    <h3>Photography</h3>
+                    <p>تعلم أساسيات التصوير، زوايا الكاميرا، الإضاءة، وتكوين الصورة الاحترافية.</p>
+                </article>
+
+                <article class="media-card reveal">
+                    <span class="media-icon">🎬</span>
+                    <h3>Video Production</h3>
+                    <p>إنتاج الفيديو من مرحلة الفكرة والسيناريو إلى التصوير والتنفيذ النهائي.</p>
+                </article>
+
+                <article class="media-card reveal">
+                    <span class="media-icon">✂️</span>
+                    <h3>Video Editing</h3>
+                    <p>تعلم المونتاج، الانتقالات، المؤثرات، تصحيح الألوان، ومزامنة الصوت.</p>
+                </article>
+
+                <article class="media-card reveal">
+                    <span class="media-icon">🎨</span>
+                    <h3>Visual Content</h3>
+                    <p>إنتاج المحتوى البصري والإعلانات والمنشورات التي تجذب الجمهور.</p>
+                </article>
+
+                <article class="media-card reveal">
+                    <span class="media-icon">🎙️</span>
+                    <h3>Audio Production</h3>
+                    <p>تسجيل الصوت، تحسين جودته، التعليق الصوتي، واختيار الموسيقى المناسبة.</p>
+                </article>
+
+                <article class="media-card reveal">
+                    <span class="media-icon">📱</span>
+                    <h3>Social Media Content</h3>
+                    <p>إعداد محتوى المنصات الاجتماعية، الريلز، القصص، والحملات الرقمية.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="media-section">
+            <div class="media-heading reveal">
+                <span>OUR WORKFLOW</span>
+                <h2>من الفكرة إلى الشاشة</h2>
+                <p>كل عمل احترافي يمر بمراحل منظمة للوصول إلى أفضل نتيجة.</p>
+            </div>
+
+            <div class="media-workflow">
+                <div class="workflow-step reveal">
+                    <div class="workflow-number">01</div>
+                    <h3>Planning</h3>
+                    <p>تحديد الهدف والجمهور والفكرة الأساسية للمحتوى.</p>
+                </div>
+
+                <div class="workflow-step reveal">
+                    <div class="workflow-number">02</div>
+                    <h3>Production</h3>
+                    <p>التصوير وتسجيل المواد المرئية والصوتية.</p>
+                </div>
+
+                <div class="workflow-step reveal">
+                    <div class="workflow-number">03</div>
+                    <h3>Editing</h3>
+                    <p>المونتاج وإضافة المؤثرات وتحسين جودة المحتوى.</p>
+                </div>
+
+                <div class="workflow-step reveal">
+                    <div class="workflow-number">04</div>
+                    <h3>Publishing</h3>
+                    <p>مراجعة العمل ونشره ومتابعة تفاعل الجمهور.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="media-section">
+            <div class="media-heading reveal">
+                <span>OUR TOOLKIT</span>
+                <h2>الأدوات التي سنستخدمها</h2>
+                <p>مجموعة من البرامج والأدوات المستخدمة في صناعة المحتوى الاحترافي.</p>
+            </div>
+
+            <div class="media-tools reveal">
+                <span class="tool">Adobe Premiere Pro</span>
+                <span class="tool">Adobe After Effects</span>
+                <span class="tool">Adobe Photoshop</span>
+                <span class="tool">Adobe Lightroom</span>
+                <span class="tool">DaVinci Resolve</span>
+                <span class="tool">CapCut</span>
+                <span class="tool">Audacity</span>
+                <span class="tool">Canva</span>
+            </div>
+        </section>
+
+        <section class="media-section">
+            <div class="media-heading reveal">
+                <span>WHAT WE CREATE</span>
+                <h2>مشاريع يمكن أن تنفذها</h2>
+                <p>هنا تتحول المهارات إلى أعمال حقيقية يمكن إضافتها إلى معرض أعمالك.</p>
+            </div>
+
+            <div class="media-projects">
+                <article class="media-project reveal">
+                    <h3>🎥 Event Aftermovie</h3>
+                    <p>فيديو سينمائي يلخص فعاليات النادي وأهم اللحظات التي حدثت خلالها.</p>
+                </article>
+
+                <article class="media-project reveal">
+                    <h3>📢 Promotional Campaign</h3>
+                    <p>حملة إعلانية متكاملة للتعريف بالنادي وأقسامه وأنشطته المختلفة.</p>
+                </article>
+
+                <article class="media-project reveal">
+                    <h3>🎬 Behind The Scenes</h3>
+                    <p>محتوى يوثق كواليس العمل الجماعي ومراحل تنفيذ المشاريع.</p>
+                </article>
+
+                <article class="media-project reveal">
+                    <h3>📱 Social Media Series</h3>
+                    <p>سلسلة من الفيديوهات القصيرة التي تقدم معلومات وأفكارًا بطريقة جذابة.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="media-section">
+            <div class="media-heading reveal">
+                <span>YOUR SKILLS</span>
+                <h2>المهارات التي ستكتسبها</h2>
+            </div>
+
+            <div class="media-skills reveal">
+                <div class="skill-item">Creative Thinking</div>
+                <div class="skill-item">Visual Storytelling</div>
+                <div class="skill-item">Team Collaboration</div>
+                <div class="skill-item">Time Management</div>
+                <div class="skill-item">Attention to Detail</div>
+                <div class="skill-item">Communication Skills</div>
+                <div class="skill-item">Content Strategy</div>
+                <div class="skill-item">Problem Solving</div>
+                <div class="skill-item">Creative Direction</div>
+            </div>
+        </section>
+
+        <section class="media-cta reveal">
+            <h2>هل أنت مستعد لصناعة قصة مختلفة؟</h2>
+            <p>
+                لا تحتاج إلى أن تكون محترفًا من البداية.
+                كل ما تحتاجه هو الشغف والاستعداد للتعلم والتجربة.
+            </p>
+            <a href="join.html?department=Media" class="media-btn primary">
+                ابدأ رحلتك مع Media
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h2>NEXUS<span>.</span></h2>
+                <p>Think Beyond. Build Together.</p>
+            </div>
+            <p>© 2026 NEXUS University Club. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/animations.js"></script>
+
+</body>
+</html>

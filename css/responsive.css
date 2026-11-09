@@ -1,0 +1,422 @@
+
+/* =========================================
+   NEXUS UNIVERSITY CLUB
+   Responsive Stylesheet
+========================================= */
+
+/* ---------- Large Tablets ---------- */
+
+@media (max-width: 1100px) {
+
+    .container {
+        width: 92%;
+    }
+
+    .nav-links {
+        gap: 14px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+    .hero-container {
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: 65px;
+    }
+
+    .orbit-three {
+        width: 400px;
+        height: 400px;
+    }
+
+    .orbit-two {
+        width: 330px;
+        height: 330px;
+    }
+
+    .orbit-one {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+/* ---------- Tablets ---------- */
+
+@media (max-width: 900px) {
+
+    .nav-container {
+        min-height: 75px;
+        gap: 15px;
+    }
+
+    .nav-menu {
+        flex: 1;
+    }
+
+    .nav-links {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .nav-links a {
+        font-size: 11px;
+    }
+
+    .nav-join {
+        padding: 9px 13px;
+        font-size: 12px;
+    }
+
+    .hero {
+        padding: 55px 0 90px;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-description {
+        max-width: 650px;
+    }
+
+    .hero-stats {
+        justify-content: center;
+    }
+
+    .hero-visual {
+        height: 420px;
+        margin-top: 20px;
+    }
+
+    .orbit-three {
+        width: 360px;
+        height: 360px;
+    }
+
+    .orbit-two {
+        width: 300px;
+        height: 300px;
+    }
+
+    .orbit-one {
+        width: 235px;
+        height: 235px;
+    }
+
+    .card-top {
+        right: 8%;
+    }
+
+    .card-bottom {
+        left: 8%;
+    }
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 650px) {
+
+    .container {
+        width: 90%;
+    }
+
+    .nav-container {
+        min-height: 70px;
+        position: relative;
+    }
+
+    .logo-text {
+        font-size: 20px;
+    }
+
+    .logo-icon {
+        width: 37px;
+        height: 37px;
+        font-size: 21px;
+    }
+
+    /* Mobile Menu */
+
+    .menu-toggle {
+        display: flex;
+        order: 2;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        left: 0;
+
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+
+        padding: 15px;
+
+        background: rgba(9, 13, 29, 0.98);
+        backdrop-filter: blur(20px);
+
+        border: 1px solid var(--border);
+        border-radius: 0 0 15px 15px;
+    }
+
+    .nav-menu.open {
+        display: flex;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 12px 10px;
+        font-size: 14px;
+    }
+
+    .nav-links a::after {
+        display: none;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        background: rgba(0, 229, 255, 0.07);
+        border-radius: 7px;
+    }
+
+    .nav-join {
+        display: none;
+    }
+
+    /* Hero */
+
+    .hero {
+        min-height: auto;
+        padding: 75px 0 90px;
+    }
+
+    .hero-tag {
+        font-size: 10px;
+        padding: 7px 12px;
+        margin-bottom: 23px;
+    }
+
+    .hero h1 {
+        font-size: 53px;
+        line-height: 1.4;
+        margin-bottom: 18px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+        line-height: 2;
+        margin-bottom: 25px;
+    }
+
+    .hero-buttons {
+        width: 100%;
+        flex-direction: column;
+        margin-bottom: 40px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        padding: 13px 20px;
+    }
+
+    .hero-stats {
+        width: 100%;
+        gap: 20px;
+        justify-content: space-between;
+    }
+
+    .stat h3 {
+        font-size: 19px;
+    }
+
+    .stat p {
+        font-size: 10px;
+    }
+
+    /* Visual */
+
+    .hero-visual {
+        height: 330px;
+        margin-top: 25px;
+    }
+
+    .visual-core {
+        width: 130px;
+        height: 130px;
+    }
+
+    .core-inner {
+        width: 85px;
+        height: 85px;
+        border-radius: 22px;
+    }
+
+    .core-inner span {
+        font-size: 48px;
+    }
+
+    .orbit-one {
+        width: 190px;
+        height: 190px;
+    }
+
+    .orbit-two {
+        width: 245px;
+        height: 245px;
+    }
+
+    .orbit-three {
+        width: 290px;
+        height: 290px;
+    }
+
+    .floating-card {
+        padding: 9px 11px;
+        gap: 8px;
+    }
+
+    .card-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 15px;
+    }
+
+    .floating-card strong {
+        font-size: 8px;
+    }
+
+    .floating-card small {
+        font-size: 9px;
+    }
+
+    .card-top {
+        top: 10px;
+        right: 0;
+    }
+
+    .card-bottom {
+        bottom: 10px;
+        left: 0;
+    }
+
+    .particle-one {
+        top: 35px;
+        left: 50px;
+    }
+
+    .particle-two {
+        bottom: 65px;
+        right: 40px;
+    }
+
+    .hero-bottom {
+        bottom: 25px;
+        font-size: 8px;
+        gap: 8px;
+    }
+
+    /* General Elements */
+
+    .page-header {
+        padding: 65px 0 40px;
+    }
+
+    .page-header h1 {
+        font-size: 36px;
+    }
+
+    .page-header p {
+        font-size: 13px;
+    }
+
+    .section-title {
+        font-size: 27px;
+    }
+
+    .nexus-card {
+        padding: 20px;
+    }
+
+    /* Footer */
+
+    .footer {
+        padding: 30px 0;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer p {
+        font-size: 12px;
+    }
+
+    .footer-copy {
+        font-size: 10px;
+    }
+}
+
+/* ---------- Small Mobile ---------- */
+
+@media (max-width: 380px) {
+
+    .hero h1 {
+        font-size: 43px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+    }
+
+    .hero-stats {
+        gap: 10px;
+    }
+
+    .stat h3 {
+        font-size: 17px;
+    }
+
+    .hero-visual {
+        height: 290px;
+    }
+
+    .orbit-three {
+        width: 255px;
+        height: 255px;
+    }
+
+    .orbit-two {
+        width: 220px;
+        height: 220px;
+    }
+
+    .orbit-one {
+        width: 175px;
+        height: 175px;
+    }
+}

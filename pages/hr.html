@@ -1,0 +1,702 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Department | NEXUS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/animations.css">
+
+    <style>
+        :root {
+            --hr: #a78bfa;
+            --hr-blue: #60a5fa;
+            --hr-dark: #312e81;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 85% 15%, rgba(139,92,246,.13), transparent 30%),
+                radial-gradient(circle at 10% 65%, rgba(96,165,250,.08), transparent 30%),
+                #08090e;
+        }
+
+        .hr-hero {
+            min-height: 83vh;
+            padding: 130px 8% 90px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(110deg, rgba(8,9,14,.97), rgba(8,9,14,.7));
+        }
+
+        .hr-hero::before {
+            content: "";
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            border: 1px solid rgba(167,139,250,.15);
+            right: -220px;
+            top: -120px;
+            box-shadow: 0 0 100px rgba(139,92,246,.12);
+        }
+
+        .hr-hero-content {
+            max-width: 750px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hr-label {
+            display: inline-block;
+            padding: 9px 18px;
+            border: 1px solid rgba(167,139,250,.4);
+            background: rgba(139,92,246,.1);
+            border-radius: 30px;
+            color: var(--hr);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .hr-hero h1 {
+            font-size: clamp(42px, 7vw, 82px);
+            line-height: 1.3;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .hr-hero h1 span {
+            display: block;
+            background: linear-gradient(90deg, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hr-hero p {
+            color: #b5b5c0;
+            font-size: 18px;
+            line-height: 2;
+            max-width: 650px;
+            margin-bottom: 35px;
+        }
+
+        .hr-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hr-btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: .3s;
+        }
+
+        .hr-btn.primary {
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            color: white;
+            box-shadow: 0 8px 30px rgba(139,92,246,.2);
+        }
+
+        .hr-btn.secondary {
+            border: 1px solid #48425d;
+            color: white;
+        }
+
+        .hr-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(139,92,246,.25);
+        }
+
+        .hr-visual {
+            position: absolute;
+            left: 9%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px solid rgba(167,139,250,.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 110px;
+            box-shadow: 0 0 80px rgba(139,92,246,.12), inset 0 0 50px rgba(139,92,246,.08);
+            animation: hrFloat 5s ease-in-out infinite;
+        }
+
+        .hr-visual::before,
+        .hr-visual::after {
+            content: "";
+            position: absolute;
+            inset: 20px;
+            border: 1px dashed rgba(167,139,250,.4);
+            border-radius: 50%;
+            animation: hrRotate 20s linear infinite;
+        }
+
+        .hr-visual::after {
+            inset: -25px;
+            border-style: solid;
+            border-color: rgba(96,165,250,.2);
+            animation-direction: reverse;
+            animation-duration: 30s;
+        }
+
+        @keyframes hrFloat {
+            0%, 100% { margin-top: 0; }
+            50% { margin-top: -15px; }
+        }
+
+        @keyframes hrRotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .hr-section {
+            padding: 90px 8%;
+        }
+
+        .hr-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .hr-heading span {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--hr);
+            font-size: 12px;
+            letter-spacing: 3px;
+        }
+
+        .hr-heading h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            margin: 12px 0;
+        }
+
+        .hr-heading p {
+            color: #9999a7;
+            line-height: 1.9;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .hr-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .hr-intro h2 {
+            font-size: 34px;
+            margin-bottom: 20px;
+        }
+
+        .hr-intro h2 span {
+            color: var(--hr);
+        }
+
+        .hr-intro p {
+            color: #aaaab5;
+            line-height: 2.1;
+            margin-bottom: 15px;
+        }
+
+        .hr-quote {
+            padding: 40px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(139,92,246,.14), rgba(96,165,250,.04));
+            border: 1px solid rgba(167,139,250,.25);
+        }
+
+        .hr-quote strong {
+            color: var(--hr);
+            display: block;
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .hr-quote p {
+            font-size: 19px;
+            color: #d0d0dc;
+            line-height: 2;
+        }
+
+        .hr-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .hr-card {
+            padding: 30px;
+            min-height: 245px;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #171723, #101019);
+            border: 1px solid #2d2b3d;
+            transition: .35s;
+        }
+
+        .hr-card:hover {
+            transform: translateY(-9px);
+            border-color: var(--hr);
+            box-shadow: 0 15px 35px rgba(139,92,246,.1);
+        }
+
+        .hr-icon {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .hr-card h3 {
+            color: white;
+            font-size: 21px;
+            margin-bottom: 13px;
+        }
+
+        .hr-card p {
+            color: #a4a4b2;
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+        .hr-process {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .hr-step {
+            text-align: center;
+            padding: 25px 15px;
+            background: #14141e;
+            border: 1px solid #2d2b3d;
+            border-radius: 16px;
+            transition: .3s;
+        }
+
+        .hr-step:hover {
+            border-color: var(--hr);
+            transform: translateY(-5px);
+        }
+
+        .hr-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 18px;
+            background: rgba(139,92,246,.15);
+            border: 1px solid var(--hr);
+            color: var(--hr);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .hr-step h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .hr-step p {
+            color: #9999a7;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .hr-skills {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .hr-skill {
+            padding: 18px;
+            border: 1px solid #2d2b3d;
+            background: rgba(255,255,255,.035);
+            border-radius: 10px;
+            color: #d4d4dc;
+        }
+
+        .hr-skill::before {
+            content: "✦";
+            color: var(--hr);
+            margin-left: 10px;
+        }
+
+        .hr-quote-banner {
+            padding: 55px 30px;
+            text-align: center;
+            border-radius: 22px;
+            border: 1px solid rgba(167,139,250,.25);
+            background: linear-gradient(120deg, rgba(139,92,246,.12), rgba(96,165,250,.08));
+        }
+
+        .hr-quote-banner h2 {
+            font-size: clamp(25px, 4vw, 38px);
+            margin-bottom: 15px;
+        }
+
+        .hr-quote-banner p {
+            color: #aaaab5;
+            line-height: 2;
+        }
+
+        .hr-cta {
+            margin: 30px 8% 90px;
+            padding: 65px 30px;
+            text-align: center;
+            border-radius: 25px;
+            background: radial-gradient(circle at center, rgba(139,92,246,.2), transparent 65%), #15131d;
+            border: 1px solid rgba(167,139,250,.3);
+        }
+
+        .hr-cta h2 {
+            font-size: clamp(27px, 4vw, 40px);
+            margin-bottom: 15px;
+        }
+
+        .hr-cta p {
+            color: #aaaab5;
+            margin-bottom: 28px;
+            line-height: 1.9;
+        }
+
+        /* NAVBAR FIX */
+        @media (min-width: 901px) {
+            .navbar {
+                display: grid !important;
+                grid-template-columns: minmax(130px, 1fr) auto minmax(130px, 1fr);
+                align-items: center;
+                width: 100%;
+                box-sizing: border-box;
+                direction: ltr;
+                padding-inline: 5%;
+                gap: 15px;
+            }
+
+            .navbar .logo {
+                justify-self: start;
+                white-space: nowrap;
+            }
+
+            .navbar .nav-links {
+                justify-self: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                direction: rtl;
+                gap: clamp(10px, 1.4vw, 22px);
+                white-space: nowrap;
+                margin: 0;
+            }
+
+            .navbar .nav-join {
+                justify-self: end;
+                white-space: nowrap;
+                margin: 0;
+                position: static;
+            }
+        }
+
+        @media (min-width: 901px) and (max-width: 1150px) {
+            .navbar .nav-links {
+                gap: 9px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .hr-visual {
+                opacity: .14;
+                left: -80px;
+            }
+
+            .hr-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hr-process {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .hr-hero {
+                min-height: 75vh;
+                padding: 110px 6% 70px;
+            }
+
+            .hr-visual {
+                display: none;
+            }
+
+            .hr-section {
+                padding: 65px 6%;
+            }
+
+            .hr-intro,
+            .hr-grid,
+            .hr-skills {
+                grid-template-columns: 1fr;
+            }
+
+            .hr-cta {
+                margin: 20px 5% 60px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .hr-process {
+                grid-template-columns: 1fr;
+            }
+
+            .hr-actions {
+                flex-direction: column;
+            }
+
+            .hr-btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">NEXUS<span>.</span></div>
+
+        <nav class="nav-links">
+            <a href="../index.html">الرئيسية</a>
+            <a href="about.html">عن النادي</a>
+            <a href="departments.html" class="active">الأقسام</a>
+            <a href="events.html">الفعاليات</a>
+            <a href="projects.html">المشاريع</a>
+            <a href="contact.html">تواصل معنا</a>
+        </nav>
+
+        <a href="join.html" class="nav-join">انضم إلينا</a>
+    </header>
+
+    <main>
+
+        <section class="hr-hero">
+            <div class="hr-hero-content reveal">
+                <span class="hr-label">NEXUS / HUMAN RESOURCES</span>
+
+                <h1>
+                    وراء كل فريق ناجح...
+                    <span>أشخاص يصنعون الفرق.</span>
+                </h1>
+
+                <p>
+                    قسم الموارد البشرية هو المكان الذي تتحول فيه المواهب
+                    إلى فرق قوية. نهتم بالأشخاص، ونبني بيئة عمل إيجابية،
+                    ونساعد كل عضو على اكتشاف إمكانياته وتطويرها.
+                </p>
+
+                <div class="hr-actions">
+                    <a href="join.html?department=HR" class="hr-btn primary">انضم لفريق HR</a>
+                    <a href="#specialties" class="hr-btn secondary">اكتشف القسم</a>
+                </div>
+            </div>
+
+            <div class="hr-visual" aria-hidden="true">👥</div>
+        </section>
+
+        <section class="hr-section">
+            <div class="hr-intro">
+                <div class="reveal">
+                    <span class="hr-label">WHO WE ARE</span>
+
+                    <h2>نؤمن أن قوة NEXUS تبدأ من <span>أفراده.</span></h2>
+
+                    <p>
+                        قسم HR مسؤول عن الاهتمام بأعضاء النادي وبناء تجربة
+                        مميزة لهم منذ لحظة انضمامهم وحتى تطورهم داخل الفريق.
+                    </p>
+
+                    <p>
+                        نعمل على تنظيم عمليات التوظيف الداخلي، ومتابعة
+                        أداء الأعضاء، وتحسين التواصل، وحل المشكلات،
+                        وخلق بيئة تساعد الجميع على التعلم والإبداع.
+                    </p>
+                </div>
+
+                <div class="hr-quote reveal">
+                    <strong>Our Philosophy</strong>
+                    <p>
+                        "People don't build great teams. Great teams
+                        build people."
+                    </p>
+                    <p>
+                        هدفنا ليس فقط تكوين فريق، بل مساعدة كل فرد
+                        على أن يصبح نسخة أفضل من نفسه.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="hr-section" id="specialties">
+            <div class="hr-heading reveal">
+                <span>OUR SPECIALTIES</span>
+                <h2>ماذا نفعل داخل HR؟</h2>
+                <p>مجالات متنوعة تساعدنا على إدارة الفريق وبناء مجتمع ناجح.</p>
+            </div>
+
+            <div class="hr-grid">
+
+                <article class="hr-card reveal">
+                    <span class="hr-icon">🎯</span>
+                    <h3>Recruitment</h3>
+                    <p>استقبال المتقدمين، تنظيم المقابلات، واختيار الأشخاص المناسبين لكل فريق.</p>
+                </article>
+
+                <article class="hr-card reveal">
+                    <span class="hr-icon">📈</span>
+                    <h3>Performance Management</h3>
+                    <p>متابعة أداء الأعضاء وتقديم الملاحظات التي تساعدهم على التطور.</p>
+                </article>
+
+                <article class="hr-card reveal">
+                    <span class="hr-icon">🤝</span>
+                    <h3>Team Building</h3>
+                    <p>تنظيم الأنشطة التي تقوي العلاقات وتزيد التعاون بين أعضاء النادي.</p>
+                </article>
+
+                <article class="hr-card reveal">
+                    <span class="hr-icon">🧠</span>
+                    <h3>Training & Development</h3>
+                    <p>تحديد احتياجات التدريب ومساعدة الأعضاء على اكتساب مهارات جديدة.</p>
+                </article>
+
+                <article class="hr-card reveal">
+                    <span class="hr-icon">💬</span>
+                    <h3>Conflict Resolution</h3>
+                    <p>الاستماع للأعضاء والمساعدة في حل الخلافات بطريقة عادلة ومحترمة.</p>
+                </article>
+
+                <article class="hr-card reveal">
+                    <span class="hr-icon">📋</span>
+                    <h3>Member Experience</h3>
+                    <p>متابعة تجربة الأعضاء وتحسين التواصل والانتماء داخل النادي.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="hr-section">
+            <div class="hr-heading reveal">
+                <span>MEMBER JOURNEY</span>
+                <h2>رحلة العضو داخل NEXUS</h2>
+                <p>نرافق كل عضو في مراحل مختلفة من رحلته داخل النادي.</p>
+            </div>
+
+            <div class="hr-process">
+
+                <div class="hr-step reveal">
+                    <div class="hr-number">01</div>
+                    <h3>Discover</h3>
+                    <p>التعرف على المتقدم واهتماماته ومهاراته.</p>
+                </div>
+
+                <div class="hr-step reveal">
+                    <div class="hr-number">02</div>
+                    <h3>Connect</h3>
+                    <p>اختيار الفريق المناسب ودمج العضو في المجتمع.</p>
+                </div>
+
+                <div class="hr-step reveal">
+                    <div class="hr-number">03</div>
+                    <h3>Develop</h3>
+                    <p>متابعة التعلم والتدريب وتطوير المهارات.</p>
+                </div>
+
+                <div class="hr-step reveal">
+                    <div class="hr-number">04</div>
+                    <h3>Lead</h3>
+                    <p>منح الفرص لتحمل المسؤولية والمشاركة في القيادة.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="hr-section">
+            <div class="hr-heading reveal">
+                <span>YOUR SKILLS</span>
+                <h2>المهارات التي ستكتسبها</h2>
+                <p>ستتعلم التعامل مع الأشخاص وإدارة المواقف والعمل داخل فريق.</p>
+            </div>
+
+            <div class="hr-skills reveal">
+                <div class="hr-skill">Communication Skills</div>
+                <div class="hr-skill">Leadership</div>
+                <div class="hr-skill">Problem Solving</div>
+                <div class="hr-skill">Active Listening</div>
+                <div class="hr-skill">Time Management</div>
+                <div class="hr-skill">Team Management</div>
+                <div class="hr-skill">Conflict Resolution</div>
+                <div class="hr-skill">Critical Thinking</div>
+                <div class="hr-skill">Decision Making</div>
+            </div>
+        </section>
+
+        <section class="hr-section">
+            <div class="hr-quote-banner reveal">
+                <h2>Leadership is about people.</h2>
+                <p>
+                    القيادة ليست مجرد منصب، بل مسؤولية تجاه الأشخاص،
+                    وقدرة على الاستماع والتوجيه وصناعة بيئة ناجحة للجميع.
+                </p>
+            </div>
+        </section>
+
+        <section class="hr-cta reveal">
+            <h2>هل تحب التعامل مع الناس وصناعة الفرق؟</h2>
+            <p>
+                لو عندك شغف بالتواصل والتنظيم والقيادة،
+                مكانك ممكن يكون معانا في HR.
+            </p>
+
+            <a href="join.html?department=HR" class="hr-btn primary">
+                ابدأ رحلتك مع HR
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h2>NEXUS<span>.</span></h2>
+                <p>Think Beyond. Build Together.</p>
+            </div>
+
+            <p>© 2026 NEXUS University Club. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/animations.js"></script>
+
+</body>
+</html>
