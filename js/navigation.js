@@ -36,50 +36,58 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Close menu when selecting any navigation link
-    navMenu.addEventListener("click", (event) => {
+    // Close immediately when touching a navigation link
+    const handleNavigation = (event) => {
+        const target = event.target;
 
-        const clickedLink = event.target.closest("a");
+        if (!(target instanceof Element)) return;
 
-        if (clickedLink) {
+        const link = target.closest("a");
+
+        if (link && navMenu.contains(link)) {
             closeMenu();
         }
+    };
 
-    }, true);
+    // Before the click event (especially on mobile)
+    navMenu.addEventListener(
+        "pointerdown",
+        handleNavigation,
+        true
+    );
 
-    // Close menu when clicking outside
+    // Fallback for normal clicks
+    navMenu.addEventListener(
+        "click",
+        handleNavigation,
+        true
+    );
+
+    // Close when clicking outside
     document.addEventListener("click", (event) => {
-
         if (
             !navMenu.contains(event.target) &&
             !menuToggle.contains(event.target)
         ) {
             closeMenu();
         }
-
     });
 
-    // Close menu when pressing Escape
+    // Close with Escape
     document.addEventListener("keydown", (event) => {
-
         if (event.key === "Escape") {
             closeMenu();
         }
-
     });
 
-    // Close menu when returning to the page
-    window.addEventListener("pageshow", () => {
-        closeMenu();
-    });
+    // Close when page loads or returns from cache
+    window.addEventListener("pageshow", closeMenu);
 
-    // Close menu when switching browser tab
+    // Close when browser tab becomes hidden
     document.addEventListener("visibilitychange", () => {
-
         if (document.hidden) {
             closeMenu();
         }
-
     });
 
     // Highlight current page
